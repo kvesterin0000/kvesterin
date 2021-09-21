@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>wasteoff! dist</title>
+	<link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="../style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="../index.html">wasteoff! dist</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../index.html">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="prices.html">Цены</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Личный кабинет
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Добавить новый релиз</a></li>
+            <li><a class="dropdown-item" href="request.html">Запрос в поддержку</a></li>
+            <li><a class="dropdown-item" href="login.html">Выйти</a></li>           
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<center>
+<p class="fs-1" style="padding-top: 100px">Управление релизами</p>
+</center>
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <div class="d-flex justify-content-evenly" style="margin: 25px;">
+    <div>
+      <img src="../resources/gg.jpeg" style="height: 200px; margin-right: 50px;">
+    </div>
+    <div>
+      <h5 class="card-title">GHETTO GARDEN (MAYOT)</h5>
+      <p class="card-text">Релиз добавлен: 04.09.2020</p>
+      <a href="#" class="btn btn-primary">Перейти</a>
+    </div>
+  </div>
+  <div class="d-flex justify-content-evenly" style="margin: 25px;">
+    <div>
+      <img src="../resources/vv.jpg" style="height: 200px; margin-right: 50px;">
+    </div>
+    <div>
+      <h5 class="card-title">Viva la Vida (SODA LUV)</h5>
+      <p class="card-text">Релиз добавлен: 06.11.2020</p>
+      <a href="#" class="btn btn-primary">Перейти</a>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-evenly" style="margin: 25px;">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Добавить новый релиз
+</button>
+<!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Ошибка</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Ошибка добавления релиза, функция в разработке(((
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Добавление релиза</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form>
+      <div class="modal-body">
+        <input class="form-control" type="text" placeholder="Исполнитель (исполнители)" aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
+        <input class="form-control" type="text" placeholder="Название релиза" aria-label="default input example" style="margin-bottom: 25px;">
+        <div class="mb-3">
+          <label for="formFile" class="form-label" style="">Добавьте обложку</label>
+          <input class="form-control" type="file" id="formFile">
+          <p class="text-muted">Обложка должна быть в формате .jpg 1500x1500.</p>
+        </div>
+        <input class="form-control" type="text" placeholder="ФИО Исполнителя" aria-label="default input example" style="margin-bottom: 25px;">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Далее</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Добавление трека</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form>
+      <div class="modal-body">
+        <input class="form-control" type="text" placeholder="Исполнитель (исполнители)" aria-label="default input example" style="margin-bottom: 25px;">
+        <input class="form-control" type="text" placeholder="Название трека" aria-label="default input example" style="margin-bottom: 25px;">
+        <input class="form-control" type="text" placeholder="Дополнительно указать (опционально)" aria-label="default input example" style="margin-bottom: 25px;">
+        <div class="mb-3">
+          <label for="formFile" class="form-label" style="">Добавьте wav-файл</label>
+          <input class="form-control" type="file" id="formFile">
+          <p class="text-muted">Файл должен быть в формате .wav 44100ghz 16bit stereo.</p>
+        </div>
+        <input class="form-control" type="text" placeholder="ФИО Исполнителя (исполнителей)" aria-label="default input example" style="margin-bottom: 25px;">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Трек содержит нецензурную лексику</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Далее</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Добавление релиза</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form>
+      <div class="modal-body">
+        <div class="d-flex justify-content-start">
+          <p style="margin-right: 25px;">Исполнитель:</p> <p>Тест</p>
+        </div>
+        <div class="d-flex justify-content-start" style="margin-bottom: 25px;">
+          <p style="margin-right: 25px;">Релиз:</p> <p>Тест</p>
+        </div>
+        <div>
+          <p>Трек-лист:</p>
+          <p>----</p>
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Подтверждаю корректность введенных данных</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Далее</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="../bootstrap/js/bootstrap.js"></script>
+</body>
+</html>
