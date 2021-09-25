@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>wasteoff! dist</title>
+	<title>FUSE by wasteoff!</title>
 	<link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="../style.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../index.html">wasteoff! dist</a>
+    <a href="../index.html"><img src="../resources/fuse.png"style="height: 20px; margin-right: 10px;"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -90,18 +90,17 @@
       </div>
       <form>
       <div class="modal-body">
-        <input class="form-control" type="text" placeholder="Исполнитель (исполнители)" aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
-        <input class="form-control" type="text" placeholder="Название релиза" aria-label="default input example" style="margin-bottom: 25px;">
-        <div class="mb-3">
-          <label for="formFile" class="form-label" style="">Добавьте обложку</label>
-          <input class="form-control" type="file" id="formFile">
-          <p class="text-muted">Обложка должна быть в формате .jpg 1500x1500.</p>
+        <div class="PerformerList" id="PerformerList">
+          <div class="Performer" style="display: flex;">
+            <input class="form-control" id="Perf" type="text" placeholder="Исполнитель" aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
+            <button type="button" class="btn btn-primary" id="addPerf" style="height: 38px; width: 38px;">+</button>
+          </div>
         </div>
-        <input class="form-control" type="text" placeholder="ФИО Исполнителя" aria-label="default input example" style="margin-bottom: 25px;">
+        <input class="form-control" type="text" placeholder="Название релиза" aria-label="default input example" style="margin-bottom: 25px;">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Далее</button>
+        <a type="button" class="btn btn-primary" href="upload.html" >Далее</a>
       </div>
       </form>
     </div>
@@ -116,7 +115,7 @@
       </div>
       <form>
       <div class="modal-body">
-        <input class="form-control" type="text" placeholder="Исполнитель (исполнители)" aria-label="default input example" style="margin-bottom: 25px;">
+          <input class="form-control" type="text" placeholder="Исполнитель" aria-label="default input example" style="margin-bottom: 25px;">
         <input class="form-control" type="text" placeholder="Название трека" aria-label="default input example" style="margin-bottom: 25px;">
         <input class="form-control" type="text" placeholder="Дополнительно указать (опционально)" aria-label="default input example" style="margin-bottom: 25px;">
         <div class="mb-3">
@@ -171,5 +170,25 @@
   </div>
 </div>
 <script src="../bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+
+  var PerfId = 0;
+  var PerformerPt1 = `<div class="PerformerElement" style="display: flex;" id="Perf`
+  var PerformerPt2 = `" > <input class="form-control" type="text" placeholder="Исполнитель" aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
+            <button type="button" class="btn btn-danger" id="removePerf" style="height: 38px; width: 38px;">-</button>
+          </div>`;
+
+  function addPerformer(){
+    PerfId++;
+    var currentPerfId = PerfId;
+    document.getElementById('PerformerList').innerHTML+=PerformerPt1+currentPerfId+PerformerPt2;
+    document.getElementById('addPerf').addEventListener("click", addPerformer);
+    document.querySelectorAll(".PerformerElement").forEach(function(el){
+      el.querySelector("button").addEventListener("click", function(e){ e.target.parentElement.remove();
+    });
+  });
+  }
+  document.getElementById('addPerf').addEventListener("click", addPerformer);
+</script>
 </body>
 </html>
