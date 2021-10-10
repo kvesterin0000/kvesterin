@@ -1,0 +1,23 @@
+{{define "login"}}
+    {{template "header"}}
+    {{template "nav" .}}
+    <body>
+    <div class="w-50 p-3" style="margin-top: 100px; margin-left: 25%;">
+        <form method="post" action="/login/">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Имя пользователя</label>
+                <input type="text" name="text" class="form-control" id="exampleInputText1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <input type="submit" value="Войти" class="btn btn-primary">
+            <input type="button" onclick="window.location.href = '../register/';"
+                   value="Регистрация" class="btn btn-light">
+        </form>
+    </div>
+    <script src="/resources/bootstrap/js/bootstrap.js"></script>
+    </body>
+    {{template "footer"}}
+{{end}}

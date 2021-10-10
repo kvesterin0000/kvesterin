@@ -1,0 +1,119 @@
+{{define "cabinet"}}
+    {{template "header"}}
+    {{template "nav" .}}
+    <body>
+    <center>
+        <p class="fs-1" style="padding-top: 100px">Управление релизами</p>
+    </center>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        {{range $i, $release := .releases}}
+            <div class="d-flex justify-content-evenly" style="margin: 25px;">
+                <div>
+                    <img src="/resources/release%20covers/{{print $release.Cover}}"
+                         style="height: 200px; width: 200px; margin-right: 50px;">
+                </div>
+                {{$status := "text-secondary"}}
+                {{if eq $release.Status "Загружен"}}
+                    {{$status = "text-success"}}
+                {{else if eq $release.Status "В исполнении"}}
+                    {{$status = "text-warning"}}
+                {{else if eq $release.Status "Отменен"}}
+                    {{$status = "text-danger"}}
+                {{end}}
+                <div>
+                    <h5 class="card-title">{{print $release.Name}}</h5>
+                    <p class="card-text">{{print $release.Authors}}</p>
+                    <p class="card-text">Релиз добавлен: {{print $release.ReleaseDate}}</p>
+                    <p class="{{$status}}">{{print $release.Status}}</p>
+                    <a href="/release/{{$release.Id}}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        {{else}}
+            <div class="d-flex justify-content-evenly" style="margin: 25px;">
+                <div>
+                    <h5 class="card-title">Релизов пока нет :(</h5>
+                </div>
+            </div>
+        {{end}}
+    </div>
+    <!-- Button trigger modal -->
+    <div class="d-flex justify-content-evenly" style="margin: 25px;">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Добавить новый релиз
+        </button>
+        <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ошибка</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Ошибка добавления релиза, функция в разработке(((
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Добавление релиза</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" action="/upload/">
+                        <div class="modal-body">
+                            <div class="PerformerList" id="PerformerList">
+                                <div class="Performer" style="display: flex;">
+                                    <input class="form-control" id="Perf" name="perf" type="text"
+                                           placeholder="Исполнитель"
+                                           aria-label="default input example"
+                                           style="margin-bottom: 25px; margin-right: 25px; ">
+                                    <button type="button" class="btn btn-primary" id="addPerf"
+                                            style="height: 38px; width: 38px;">+
+                                    </button>
+                                </div>
+                            </div>
+                            <input type="text" name="releaseName" class="form-control" placeholder="Название релиза"
+                                   aria-label="default input example" style="margin-bottom: 25px;">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                            <input type="submit" value="Далее" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="/resources/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript">
+
+            var PerfId = 0;
+            var PerformerPt1 = `<div class="PerformerElement" style="display: flex;" id="Perf`
+            var PerformerPt2 = `" > <input class="form-control" type="text" name="perf" placeholder="Исполнитель"`
+                           +` aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
+            <button type="button" class="btn btn-danger" id="removePerf" style="height: 38px; width: 38px;">-</button>
+            </div>`;
+
+            function addPerformer() {
+                PerfId++;
+                let currentPerfId = PerfId;
+                let node = document.createElement("div");
+                node.innerHTML = PerformerPt1 + currentPerfId + PerformerPt2;
+                document.getElementById('PerformerList').appendChild(node);
+                node.querySelector("button").addEventListener("click", function (e) {
+                        e.target.parentElement.parentElement.remove();
+                    });
+            }
+
+            document.getElementById('addPerf').addEventListener("click", addPerformer);
+        </script>
+    </div>
+    </body>
+    {{template "footer"}}
+{{end}}

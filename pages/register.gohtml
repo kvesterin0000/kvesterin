@@ -1,0 +1,27 @@
+{{define "register"}}
+    {{template "header"}}
+    {{template "nav" .}}
+    <body>
+    <div class="w-50 p-3" style="margin-top: 100px; margin-left: 25%;">
+        <form method="post" action="/register/">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputText1" class="form-label">Имя пользователя</label>
+                <input type="text" name="text" class="form-control" id="exampleInputText1" aria-describedby="textHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <input type="submit" value="Зарегистрироваться" class="btn btn-primary">
+            <input type="button" onclick="window.location.href = '../login';"
+                   value="Уже есть аккаунт" class="btn btn-light">
+        </form>
+    </div>
+    <script src="/resources/bootstrap/js/bootstrap.js"></script>
+    </body>
+    {{template "footer"}}
+{{end}}

@@ -1,0 +1,20 @@
+{{define "index"}}
+    {{template "header"}}
+    {{template "nav" .}}
+    <body>
+    <center>
+        <img src="/resources/fuse.png" style="height: 100px; margin-top: 300px;">
+        <p class="fs-1" style="padding-top: 200px">Дистрибуция доступна каждому</p>
+        <p class="text-secondary">Наш сервис предоставляет высококачественную загрузку релизов на цифровые площадки</p>
+        <div class="d-flex justify-content-evenly" style="padding-top: 200px;">
+            <img src="/resources/spotify.png" style="height: 100px;">
+            <img src="/resources/apple.png" style="height: 100px;">
+            <img src="/resources/vk.jpg" style="height: 100px;">
+            <img src="/resources/boom.png" style="height: 100px;">
+        </div>
+        <p class="fs-2" style="padding-top: 300px">C чего начать?</p>
+    </center>
+    <script src="/resources/bootstrap/js/bootstrap.js"></script>
+    </body>
+    {{template "footer"}}
+{{end}}

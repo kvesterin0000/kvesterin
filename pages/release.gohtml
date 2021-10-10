@@ -1,0 +1,20 @@
+{{define "release"}}
+    {{template "header"}}
+    {{template "nav" .}}
+    <body>
+    <div style="margin: 100px auto; width:300px;">
+        <p class="fs-2" style="margin: 0 auto;">{{print .release.Name}}</p>
+        <img src="/resources/release%20covers/{{print .release.Cover}}"
+             style="width: 300px; padding-top: 20px;">
+        {{range $i, $track := .tracks}}
+            <div style="margin-top: 20px;">
+                <p style="margin: 0 auto; width:300px;">{{print $track.Authors}} - {{print $track.Name}}</p>
+            </div>
+        {{else}}
+            <p>Пошел нахуй</p>
+        {{end}}
+    </div>
+    <script src="/resources/bootstrap/js/bootstrap.js"></script>
+    </body>
+    {{template "footer"}}
+{{end}}

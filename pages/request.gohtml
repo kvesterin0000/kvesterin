@@ -1,0 +1,39 @@
+{{define "request"}}
+    {{template "header"}}
+    {{template "nav" .}}
+    <body>
+    <p class="fs-1" style="padding-left: 100px; padding-top: 100px">Новый запрос в поддержку</p>
+    <div style="padding: 50px 200px 0px 100px">
+        <form>
+            <input class="form-control form-control-lg" type="text" placeholder="Название релиза"
+                   aria-label=".form-control-lg example" style="margin-bottom: 20px;">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Запрос"
+                      style="margin-bottom: 20px;"></textarea>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Отправить
+            </button>
+        </form>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Успешно</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="formFile" class="form-label" style="">Запрос отправлен</label>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" onclick="window.location.href = '{{"cabinet"}}';" value="Отлично"
+                           class="btn btn-success">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/resources/bootstrap/js/bootstrap.js"></script>
+    </body>
+    {{template "footer"}}
+
+{{end}}
