@@ -1,10 +1,9 @@
-#nav_panel{
+#nav_panel {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-left: 200px;
     margin-right: 200px;
-    list-style-type: none;
     margin-top: 30px;
 }
 
@@ -12,8 +11,8 @@
     padding: 10px;
     width: 125px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     font-size: 30px;
     text-decoration: none;
     color: black;
@@ -24,6 +23,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 #logo {
     width: 30px;
 }
@@ -33,7 +33,7 @@ li {
     padding-right: 25px;
 }
 
-.logo a{
+.logo a {
     text-decoration: none;
     color: black;
 }
@@ -45,35 +45,187 @@ li {
 
 }
 
+.bar p {
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+}
+
 .bar a:hover {
     transition-duration: 0.5s;
     color: coral;
 }
 
-label {
-    font-size: 30px;
-}
-
-
-#hider {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-}
-#hider:checked + .content {
-    display: block;
-}
-#clickme {
-    text-decoration: none;
-    color: black;
+.bar p:hover {
+    transition-duration: 0.5s;
+    color: coral;
     cursor: pointer;
 }
 
-#clickme:hover {
+.menu-content {
+    display: none;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 275px;
+    background-color: black;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.menu-content a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    display: block;
+}
+
+#logout {
+    color: rgb(208, 208, 208);
+}
+
+#login {
+    padding-right: 75px;
+}
+
+#logout:hover {
+    transition-duration: 0.5s;
+    color: rgba(255, 127, 80, 0.8);
+}
+
+.menu-content a:hover {
     transition-duration: 0.5s;
     color: coral;
 }
 
-.content {
-    display: none;
+
+.show {
+    display: block;
+}
+
+.release {
+    padding-top: 25px;
+    width: 625px;
+    height: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 25px;
+    border-radius: 5px;
+}
+
+.release:hover {
+    transition-duration: 0.25s;
+    background-color: rgba(255,127,80,0.05);
+}
+
+.release_name {
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.release_authors {
+    font-size: 25px;
+}
+
+.release_cover {
+    height: 260px;
+    width: 260px;
+    margin-right: 50px;
+    border-radius: 5px;
+}
+
+.release_date {
+    font-size: 25px;
+    color: rgba(0,0,0,0.5);
+}
+
+.release_status_default {
+    width: 220px;
+    font-size: 25px;
+    color: rgba(31,31,31,1);
+    background-color: rgba(31,31,31,0.2);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.release_status_success {
+    width: 220px;
+    font-size: 25px;
+    color: rgba(54,209,54,1);
+    background-color: rgba(54,209,54,0.2);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.release_status_pending {
+    width: 220px;
+    font-size: 25px;
+    color: rgba(212,203,44,1);
+    background-color: rgba(212,203,44,0.2);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.release_status_canceled {
+    width: 220px;
+    font-size: 25px;
+    color: rgba(222,53,53,1);
+    background-color: rgba(222,53,53,0.2);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-primary {
+    color: white;
+}
+
+.btn-primary:hover {
+    color: rgba(0,0,0,0.5);
+}
+
+.release_info {
+    margin: 100px auto;
+    width: 500px;
+    min-height: 750px;
+    background-color: rgba(255,127,80,0.05);
+    border-radius: 5px;
+}
+
+.release_info:hover {
+    transition-duration: 0.25s;
+    background-color: rgba(255,127,80,0.1);
+    border-radius: 5px;
+}
+
+.t_release_name {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-weight: bolder;
+    font-size: 50px;
+    text-align: center;
+}
+
+.t_release_cover {
+    margin-left: 75px;
+    height: 350px;
+    width: 350px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
+
+.track_list {
+    margin-top: 20px;
+}
+
+.track {
+    font-size: 25px;
+    width: 400px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+#t_release_status {
+    margin-left: 140px;
+    margin-top: 25px;
 }

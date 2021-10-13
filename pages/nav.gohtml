@@ -3,18 +3,23 @@
         <div id="nav_panel">
             <div class="logo">
                 <img id="logo" src="../resources/logo.svg">
-                <a href="../{{"index"}}">FUSE</a>
+                <a href="{{.pages.index.BackTo}}">FUSE</a>
             </div>
             <div class="bar">
-                <a href="../{{"index"}}">Главная</a>
-                <a href="../{{"prices"}}">Цены</a>
-                <label class="link" for="hider" id="clickme">Кабинет</label>
-                <input type="checkbox" id="hider">
-                <div class="content">
-                    <a href="">1</a><br>
-                    <a href="">2</a><br>
-                    <a href="">3</a><br>
-                </div>
+                <a href="{{.pages.index.BackTo}}">Главная</a>
+                <a href="{{.pages.prices.BackTo}}">Цены</a>
+                <p class="cabinet" onclick="menu()">Профиль</p>
+                {{if .loggedIn}}
+                    <div id="menu" class="menu-content">
+                        <a href="{{.pages.cabinet.BackTo}}">Личный кабинет</a>
+                        <a href="{{.pages.request.BackTo}}">Запрос в поддержку</a>
+                        <a href="{{.pages.login.BackTo}}" id="logout">Выход</a>
+                    </div>
+                {{else}}
+                    <div id="menu" class="menu-content">
+                        <a href="{{.pages.login.BackTo}}" id="login">Вход</a>
+                    </div>
+                {{end}}
             </div>
         </div>
     </nav>

@@ -4,6 +4,26 @@
             <p class="fs-4" style="color: white">wasteoff! 2021</p>
         </div>
     </div>
+    <script>
+        /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+        function menu() {
+            document.getElementById("menu").classList.toggle("show");
+        }
 
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.cabinet')) {
+
+                var dropdowns = document.getElementsByClassName("menu-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
     </html>
 {{end}}

@@ -5,20 +5,15 @@ import (
 	"net/http"
 )
 
-const indexPage = "index"
+const notFoundPage = "notFound"
 
 func init() {
-	// Index page
+	// notFound Page
 	initPages = append(initPages, func(p *Pages) Page {
 		var pg page
-		pg.name = indexPage
+		pg.name = notFoundPage
 		pg.get = func(rw http.ResponseWriter, r *http.Request) {
-			userId := readSession(r)
-			var params = map[string]interface{}{
-				"loggedIn": userId > 0,
-				"pages":    p.GetPagesInfo(),
-			}
-			err := p.tmpl.Lookup(pg.name).Execute(rw, params)
+			err := p.tmpl.Lookup("notFound").Execute(rw, nil)
 			if err != nil {
 				fmt.Println(err)
 			}

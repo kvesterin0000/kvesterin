@@ -6,8 +6,9 @@ import (
 )
 
 type PageInfo struct {
-	Name string
-	Path string
+	Name   string
+	Path   string
+	BackTo string
 }
 
 type Page interface {
@@ -24,8 +25,9 @@ type page struct {
 
 func (p *page) Info() PageInfo {
 	return PageInfo{
-		Name: p.name,
-		Path: "/" + p.name + "/",
+		Name:   p.name,
+		Path:   "/" + p.name + "/",
+		BackTo: "../" + p.name,
 	}
 }
 

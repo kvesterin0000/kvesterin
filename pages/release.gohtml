@@ -2,19 +2,28 @@
     {{template "header"}}
     {{template "nav" .}}
     <body>
-    <div style="margin: 100px auto; width:300px;">
-        <p class="fs-2" style="margin: 0 auto;">{{print .release.Name}}</p>
-        <img src="/resources/release%20covers/{{print .release.Cover}}"
-             style="width: 300px; padding-top: 20px;">
+    <div class="release_info">
+        {{$status := "release_status_default"}}
+        {{if eq .release.Status "Загружен"}}
+            {{$status = "release_status_success"}}
+        {{else if eq .release.Status "В исполнении"}}
+            {{$status = "release_status_pending"}}
+        {{else if eq .release.Status "Отменен"}}
+            {{$status = "release_status_canceled"}}
+        {{end}}
+        <p class="{{$status}}" id="t_release_status">{{print .release.Status}}</p>
+        <p class="t_release_name" style="margin: 0 auto;">{{print .release.Name}}</p>
+        <img src="/resources/release%20covers/{{print .release.Cover}}" class="t_release_cover"
+             style="margin-top: 20px;">
         {{range $i, $track := .tracks}}
-            <div style="margin-top: 20px;">
-                <p style="margin: 0 auto; width:300px;">{{print $track.Authors}} - {{print $track.Name}}</p>
+            <div class="track_list">
+                <p class="track">{{print $track.Authors}} - {{print $track.Name}}</p>
             </div>
         {{else}}
             <p>Пошел нахуй</p>
         {{end}}
     </div>
-    <script src="/resources/bootstrap/js/bootstrap.js"></script>
+    <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>
     {{template "footer"}}
 {{end}}

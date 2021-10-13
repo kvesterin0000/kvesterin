@@ -7,25 +7,25 @@
     </center>
     <div style="display: flex; flex-wrap: wrap; justify-content: center;">
         {{range $i, $release := .releases}}
-            <div class="d-flex justify-content-evenly" style="margin: 25px;">
+            <div class="release">
                 <div>
                     <img src="/resources/release%20covers/{{print $release.Cover}}"
-                         style="height: 200px; width: 200px; margin-right: 50px;">
+                         class="release_cover">
                 </div>
-                {{$status := "text-secondary"}}
+                {{$status := "release_status_default"}}
                 {{if eq $release.Status "Загружен"}}
-                    {{$status = "text-success"}}
+                    {{$status = "release_status_success"}}
                 {{else if eq $release.Status "В исполнении"}}
-                    {{$status = "text-warning"}}
+                    {{$status = "release_status_pending"}}
                 {{else if eq $release.Status "Отменен"}}
-                    {{$status = "text-danger"}}
+                    {{$status = "release_status_canceled"}}
                 {{end}}
                 <div>
-                    <h5 class="card-title">{{print $release.Name}}</h5>
-                    <p class="card-text">{{print $release.Authors}}</p>
-                    <p class="card-text">Релиз добавлен: {{print $release.ReleaseDate}}</p>
                     <p class="{{$status}}">{{print $release.Status}}</p>
-                    <a href="/release/{{$release.Id}}" class="btn btn-primary">Перейти</a>
+                    <p class="release_name">{{print $release.Name}}</p>
+                    <p class="release_authors">{{print $release.Authors}}</p>
+                    <p class="release_date">{{print $release.ReleaseDate}}</p>
+                    <a href="/release/{{$release.Id}}" class="btn btn-primary">Открыть </a>
                 </div>
             </div>
         {{else}}
@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-        <script src="/resources/bootstrap/js/bootstrap.js"></script>
+        <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
         <script type="text/javascript">
 
             var PerfId = 0;

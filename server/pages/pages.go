@@ -32,6 +32,9 @@ func New(service db.Service) *Pages {
 }
 
 func (p *Pages) AddPage(page Page) {
+	if p.list == nil {
+		p.list = make(map[string]Page)
+	}
 	p.list[page.Info().Name] = page
 }
 
@@ -39,10 +42,10 @@ func (p *Pages) GetPage(name string) Page {
 	return p.list[name]
 }
 
-func (p *Pages) GetPagesInfo() []PageInfo {
-	var pagesInfo []PageInfo
+func (p *Pages) GetPagesInfo() map[string]PageInfo {
+	var pagesInfo = make(map[string]PageInfo)
 	for _, page := range p.list {
-		pagesInfo = append(pagesInfo, page.Info())
+		pagesInfo[page.Info().Name] = page.Info()
 	}
 	return pagesInfo
 }
@@ -58,7 +61,7 @@ func (p *Pages) GetHandler() http.Handler {
 
 func (p *Pages) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	uri := strings.SplitN(r.RequestURI, "/", 3)
-	if len(uri) != 3 {
+	if len(uri) < 2 {
 		return
 	}
 	pageName := uri[1]
