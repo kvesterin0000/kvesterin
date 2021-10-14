@@ -1,24 +1,28 @@
+/*navigation menu*/
+
 #nav_panel {
+    position: fixed;
+    width: 100%;
+    height: 75px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-left: 200px;
-    margin-right: 200px;
-    margin-top: 30px;
+    background-color: white;
+    margin-bottom: 100px;
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.2);
 }
 
-.logo {
-    padding: 10px;
+.left_nav {
     width: 125px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     font-size: 30px;
     text-decoration: none;
     color: black;
 }
 
-.bar {
+.right_nav {
+    padding-top: 15px;
     width: 400px;
     display: flex;
     justify-content: space-between;
@@ -28,35 +32,31 @@
     width: 30px;
 }
 
-li {
-    padding-left: 25px;
-    padding-right: 25px;
-}
 
-.logo a {
+.left_nav a {
     text-decoration: none;
     color: black;
 }
 
-.bar a {
+.right_nav a {
     text-decoration: none;
     color: black;
     font-size: 30px;
 
 }
 
-.bar p {
+.right_nav p {
     text-decoration: none;
     color: black;
     font-size: 30px;
 }
 
-.bar a:hover {
+.right_nav a:hover {
     transition-duration: 0.5s;
     color: coral;
 }
 
-.bar p:hover {
+.right_nav p:hover {
     transition-duration: 0.5s;
     color: coral;
     cursor: pointer;
@@ -97,10 +97,11 @@ li {
     color: coral;
 }
 
-
 .show {
     display: block;
 }
+
+/*cabinet release block*/
 
 .release {
     padding-top: 25px;
@@ -108,13 +109,28 @@ li {
     height: 300px;
     display: flex;
     justify-content: space-evenly;
-    margin: 25px;
+    margin: 50px;
     border-radius: 5px;
 }
 
-.release:hover {
-    transition-duration: 0.25s;
-    background-color: rgba(255,127,80,0.05);
+#d_release_status_default:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(31, 31, 31, 0.08);
+}
+
+#d_release_status_success:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(54, 209, 54, 0.08);
+}
+
+#d_release_status_pending:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(212, 203, 44, 0.08);
+}
+
+#d_release_status_canceled:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(222, 53, 53, 0.08);
 }
 
 .release_name {
@@ -135,14 +151,14 @@ li {
 
 .release_date {
     font-size: 25px;
-    color: rgba(0,0,0,0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .release_status_default {
     width: 220px;
     font-size: 25px;
-    color: rgba(31,31,31,1);
-    background-color: rgba(31,31,31,0.2);
+    color: rgba(31, 31, 31, 1);
+    background-color: rgba(31, 31, 31, 0.2);
     border-radius: 5px;
     text-align: center;
 }
@@ -150,8 +166,8 @@ li {
 .release_status_success {
     width: 220px;
     font-size: 25px;
-    color: rgba(54,209,54,1);
-    background-color: rgba(54,209,54,0.2);
+    color: rgba(54, 209, 54, 1);
+    background-color: rgba(54, 209, 54, 0.2);
     border-radius: 5px;
     text-align: center;
 }
@@ -159,8 +175,8 @@ li {
 .release_status_pending {
     width: 220px;
     font-size: 25px;
-    color: rgba(212,203,44,1);
-    background-color: rgba(212,203,44,0.2);
+    color: rgba(212, 203, 44, 1);
+    background-color: rgba(212, 203, 44, 0.2);
     border-radius: 5px;
     text-align: center;
 }
@@ -168,36 +184,29 @@ li {
 .release_status_canceled {
     width: 220px;
     font-size: 25px;
-    color: rgba(222,53,53,1);
-    background-color: rgba(222,53,53,0.2);
+    color: rgba(222, 53, 53, 1);
+    background-color: rgba(222, 53, 53, 0.2);
     border-radius: 5px;
     text-align: center;
 }
 
-.btn-primary {
-    color: white;
-}
-
-.btn-primary:hover {
-    color: rgba(0,0,0,0.5);
-}
+/*release info and track list*/
 
 .release_info {
-    margin: 100px auto;
+    margin: 50px auto;
     width: 500px;
     min-height: 750px;
-    background-color: rgba(255,127,80,0.05);
     border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
 }
 
 .release_info:hover {
-    transition-duration: 0.25s;
-    background-color: rgba(255,127,80,0.1);
-    border-radius: 5px;
+    transition-duration: 0.5s;
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.15);
 }
 
 .t_release_name {
-    padding-top: 50px;
     padding-bottom: 50px;
     font-weight: bolder;
     font-size: 50px;
@@ -215,6 +224,7 @@ li {
 
 .track_list {
     margin-top: 20px;
+
 }
 
 .track {
@@ -223,9 +233,138 @@ li {
     text-align: center;
     margin: 0 auto;
     padding: 5px;
+    border-bottom: 1px solid rgba(255, 127, 80, 0.2);
 }
 
-#t_release_status {
+.t_release_status {
     margin-left: 140px;
-    margin-top: 25px;
+    margin-bottom: 30px;
+    padding-top: 40px;
+}
+
+#t_release_return {
+    width: 280px;
+    margin-top: 100px;
+    margin-bottom: 25px;
+    margin-left: 110px;
+}
+
+/*login and register boxes*/
+
+.login_box {
+    width: 500px;
+    margin: 0 auto 500px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
+}
+
+.email_box {
+    width: 400px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    padding-top: 50px;
+}
+
+.username_boxR {
+    width: 400px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.username_box {
+    width: 400px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    padding-top: 50px;
+}
+
+.pass_box {
+    width: 400px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.btn_box {
+    margin-left: 50px;
+    padding-bottom: 50px;
+}
+
+
+input[type=email] {
+    font-size: 20px;
+}
+
+input[type=text] {
+    font-size: 20px;
+}
+
+input[type=password] {
+    font-size: 20px;
+}
+
+/*prices accordion*/
+
+.accordion {
+    margin: 0 auto;
+    width: 600px;
+    padding-bottom: 50px;
+}
+
+.accordion-button {
+    font-size: 20px;
+}
+
+.accordion-body {
+    font-size: 20px;
+}
+
+/*request box*/
+
+.request_box {
+    font-size: 20px;
+    margin-left: 75px;
+    width: 750px;
+}
+
+#formBtn {
+    margin-left: 75px;
+    margin-bottom: 50px;
+}
+
+
+.request {
+    padding-top: 75px;
+    width: 900px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
+}
+
+
+/*size const*/
+
+label {
+    font-size: 20px;
+}
+
+p {
+    font-size: 20px;
+}
+
+.zg {
+    font-size: 30px;
+}
+
+/*buttons*/
+
+.btn {
+    font-size: 20px;
+}
+
+.btn-primary {
+    color: white;
+}
+
+.btn-primary:hover {
+    color: rgb(240, 240, 240);
 }

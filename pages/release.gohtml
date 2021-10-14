@@ -2,16 +2,19 @@
     {{template "header"}}
     {{template "nav" .}}
     <body>
+    {{$status := "release_status_default"}}
+    {{if eq .release.Status "Загружен"}}
+        {{$status = "release_status_success"}}
+    {{else if eq .release.Status "В исполнении"}}
+        {{$status = "release_status_pending"}}
+    {{else if eq .release.Status "Отменен"}}
+        {{$status = "release_status_canceled"}}
+    {{end}}
+    <p class="zg" style="padding-top: 150px; text-align: center">Карточка релиза</p>
     <div class="release_info">
-        {{$status := "release_status_default"}}
-        {{if eq .release.Status "Загружен"}}
-            {{$status = "release_status_success"}}
-        {{else if eq .release.Status "В исполнении"}}
-            {{$status = "release_status_pending"}}
-        {{else if eq .release.Status "Отменен"}}
-            {{$status = "release_status_canceled"}}
-        {{end}}
-        <p class="{{$status}}" id="t_release_status">{{print .release.Status}}</p>
+        <div class="t_release_status">
+            <p class="{{$status}}">{{print .release.Status}}</p>
+        </div>
         <p class="t_release_name" style="margin: 0 auto;">{{print .release.Name}}</p>
         <img src="/resources/release%20covers/{{print .release.Cover}}" class="t_release_cover"
              style="margin-top: 20px;">
@@ -19,9 +22,8 @@
             <div class="track_list">
                 <p class="track">{{print $track.Authors}} - {{print $track.Name}}</p>
             </div>
-        {{else}}
-            <p>Пошел нахуй</p>
         {{end}}
+        <a href="{{.pages.cabinet.BackTo}}" id="t_release_return" class="btn btn-primary">Вернуться к релизам</a>
     </div>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>

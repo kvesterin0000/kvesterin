@@ -2,15 +2,18 @@
     {{template "header"}}
     {{template "nav" .}}
     <body>
-    <p class="fs-1" style="padding-left: 100px; padding-top: 100px">Новый запрос в поддержку</p>
-    <div style="padding: 50px 200px 0px 100px">
+    <p class="zg" style="padding-top: 150px; text-align: center;">Запрос в поддержку</p>
+    <div class="request">
         <form>
-            <input class="form-control form-control-lg" type="text" placeholder="Название релиза"
-                   aria-label=".form-control-lg example" style="margin-bottom: 20px;">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Запрос"
+            <div class="request_box">
+            <label>Название релиза</label>
+            <input class="form-control form-control-lg" type="text" style="margin-bottom: 20px;">
+            <label>Запрос</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
                       style="margin-bottom: 20px;"></textarea>
+            </div>
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop">Отправить
+                    data-bs-target="#staticBackdrop" id="formBtn">Отправить
             </button>
         </form>
     </div>

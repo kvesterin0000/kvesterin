@@ -66,6 +66,10 @@ func (p *Pages) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 	pageName := uri[1]
 	page := p.GetPage(pageName)
+	if page == nil {
+		rw.WriteHeader(http.StatusNoContent)
+		return
+	}
 	switch r.Method {
 	case http.MethodGet:
 		page.Get(rw, r)
