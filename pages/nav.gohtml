@@ -1,23 +1,23 @@
 {{define "nav"}}
     <nav>
         <div id="nav_panel">
-            <div class="left_nav">
-                <img id="logo" src="../resources/logo.svg">
-                <a href="{{.pages.index.BackTo}}">FUSE</a>
+            <div class="left_nav" onclick="window.location.href = '../index/';">
+                <img id="logo" src="../resources/img/logo.png">
+                <p class="left_link" href="{{.pages.index.BackTo}}">FUSE</p>
             </div>
             <div class="right_nav">
-                <a href="{{.pages.index.BackTo}}">Главная</a>
-                <a href="{{.pages.prices.BackTo}}">Цены</a>
-                <p class="cabinet" onclick="menu()">Профиль</p>
+                <a href="{{.pages.index.BackTo}}">{{print .locales.nav_main}}</a>
+                <a href="{{.pages.prices.BackTo}}">{{print .locales.nav_prices}}</a>
+                <p class="cabinet" onclick="menu()">{{print .locales.nav_profile}}</p>
                 {{if .loggedIn}}
                     <div id="menu" class="menu-content">
-                        <a href="{{.pages.cabinet.BackTo}}">Личный кабинет</a>
-                        <a href="{{.pages.request.BackTo}}">Запрос в поддержку</a>
-                        <a href="{{.pages.login.BackTo}}" id="logout">Выход</a>
+                        <a href="{{.pages.cabinet.BackTo}}">{{print .locales.nav_cabinet}}</a>
+                        <a href="{{.pages.request.BackTo}}">{{print .locales.nav_request}}</a>
+                        <a href="{{.pages.login.BackTo}}" id="logout">{{print .locales.nav_logout}}</a>
                     </div>
                 {{else}}
                     <div id="menu" class="menu-content">
-                        <a href="{{.pages.login.BackTo}}" id="login">Вход</a>
+                        <a href="{{.pages.login.BackTo}}" id="login">{{print .locales.nav_login}}</a>
                     </div>
                 {{end}}
             </div>

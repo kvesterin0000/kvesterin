@@ -28,7 +28,8 @@ func init() {
 			if userId <= 0 {
 				http.Redirect(rw, r, "../login", http.StatusSeeOther)
 			}
-			perfs := []string{r.FormValue("perf")}
+			var perfs string
+			perfs = r.FormValue("perf") + ","
 			releaseName := r.FormValue("releaseName")
 			var params = map[string]interface{}{
 				"loggedIn":    userId > 0,

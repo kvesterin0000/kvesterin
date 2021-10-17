@@ -1,0 +1,175 @@
+[
+  {
+    "nav_main": "Home"
+  },
+  {
+    "nav_prices": "Prices"
+  },
+  {
+    "nav_profile": "Profile"
+  },
+  {
+    "nav_cabinet": "Cabinet"
+  },
+  {
+    "nav_request": "Support"
+  },
+  {
+    "nav_logout": "Sign out"
+  },
+  {
+    "nav_login": "Sign in"
+  },
+
+
+  {
+    "title": "Distribution is now available for everyone"
+  },
+  {
+    "desc": "Our service presents high quality music distribution"
+  },
+  {
+    "start": "How to start?"
+  },
+
+
+  {
+    "prices_where": "Where are prices?"
+  },
+  {
+    "prices_lower": "Prices are lower than those of competitors"
+  },
+  {
+    "prices_single": "Single Upload"
+  },
+  {
+    "prices_single_st": "Uploading costs 4$."
+  },
+  {
+    "prices_single_p": "Your release will be on streaming services within 1-3 days. Artist card will be generated after first upload. Your earnings 70%."
+  },
+  {
+    "prices_ep": "EP Upload"
+  },
+  {
+    "prices_ep_st": "Uploading costs 3$ for each track in release."
+  },
+  {
+    "prices_ep_p": "EP - 2-4 tracks.\nYour release will be on streaming services within 1-3 days. Artist card will be generated after first upload. Your earnings 70%."
+  },
+  {
+    "prices_album": "Album Upload"
+  },
+  {
+    "prices_album_st": "Uploading costs 2$ for each track in release."
+  },
+  {
+    "prices_album_p": "Album - 5+ tracks.\nYour release will be on streaming services within 1-3 days. Artist card will be generated after first upload. Your earnings 70%."
+  },
+
+
+  {
+    "login_p": "Authorization"
+  },
+  {
+    "login_user": "Username"
+  },
+  {
+    "login_pass": "Password"
+  },
+  {
+    "login_complete": "Sign in"
+  },
+  {
+    "login_reg": "Sign up"
+  },
+  {
+    "reg_p": "Registration"
+  },
+  {
+    "reg_email": "E-Mail"
+  },
+  {
+    "reg_complete": "Sign up"
+  },
+  {
+    "reg_login": "Sign in"
+  },
+
+
+  {
+    "cabinet_p": "Release manager"
+  },
+  {
+    "cabinet_more": "More"
+  },
+  {
+    "cabinet_upload": "Upload new release"
+  },
+  {
+    "cabinet_no_releases": "No releases now :("
+  },
+  {
+    "status_default": "Created"
+  },
+  {
+    "status_success": "Success"
+  },
+  {
+    "status_pending": "Pending"
+  },
+  {
+    "status_canceled": "Canceled"
+  },
+
+
+  {
+    "release_p": "Release card"
+  },
+  {
+    "release_return": "Back to all releases"
+  },
+
+
+  {
+    "request_p": "Support request"
+  },
+  {
+    "request_release_name": "Release name"
+  },
+  {
+    "request_text": "Request"
+  },
+  {
+    "request_send": "Send"
+  },
+  {
+    "request_success": "Successful"
+  },
+  {
+    "request_sent": "Request has been sent"
+  },
+  {
+    "request_btn_success": "Awesome"
+  },
+
+
+  {
+    "footer_info": "GENERAL INFORMATION"
+  },
+  {
+    "footer_vk": "VK Community"
+  },
+  {
+    "footer_yt": "YouTube Channel"
+  },
+  {
+    "footer_dev": "Developer"
+  },
+  {
+    "footer_more": "MORE ABOUT SERVICES"
+  },
+  {
+    "footer_dist": "Distribution"
+  }
+]

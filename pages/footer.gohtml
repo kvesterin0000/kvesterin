@@ -1,9 +1,21 @@
 {{define "footer"}}
-    <div style="background-color: rgba(0,0,0,0.95); height: 65px; margin-top: 360px;">
-        <div class="d-flex justify-content-evenly" style="padding-top: 10px; align-items: center;">
-            <p class="fs-4" style="color: white">wasteoff! 2021</p>
+    <footer>
+        <div class="footer_info">
+            <div class="w_logo"><img src="../resources/img/f_x_w_logo.png"></div>
+            <div>
+                <p>{{print .locales.footer_info}}</p>
+                <a href="https://vk.com/wasteoffbeats" target="_blank">{{print .locales.footer_vk}}</a><br>
+                <a href="https://www.youtube.com/c/wasteoff" target="_blank">{{print .locales.footer_yt}}</a><br>
+                <a href="https://github.com/wasteimage" target="_blank">{{print .locales.footer_dev}}</a><br>
+            </div>
+            <div>
+                <p>{{print .locales.footer_more}}</p>
+                <a href="https://vk.com/market-197221466?w=product-197221466_5356470"
+                   target="_blank">{{print .locales.footer_dist}}</a><br>
+                <a href="">FAQ</a><br>
+            </div>
         </div>
-    </div>
+    </footer>
     <script>
         /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
         function menu() {
@@ -24,8 +36,9 @@
                 }
             }
         }
+
         function scroll_down() {
-            window.scrollTo(0,750);
+            window.scrollTo(0, 750);
         }
     </script>
     </html>

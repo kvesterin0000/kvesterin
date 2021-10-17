@@ -2,20 +2,30 @@
     {{template "header"}}
     {{template "nav" .}}
     <body>
-        <p class="zg" style="padding-top: 150px; text-align: center">Управление релизами</p>
+        <p class="zg" style="padding-top: 150px; text-align: center">{{print .locales.cabinet_p}}</p>
     <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        {{$more := .locales.cabinet_more}}
+        {{$no_releases := .locales.cabinet_no_releases}}
+        {{$status_default := .locales.status_default}}
+        {{$status_success := .locales.status_success}}
+        {{$status_pending := .locales.status_pending}}
+        {{$status_canceled := .locales.status_canceled}}
         {{range $i, $release := .releases}}
             {{$status := "release_status_default"}}
             {{$statusD := "d_release_status_default"}}
+            {{$statusL := $status_default}}
             {{if eq $release.Status "Загружен"}}
                 {{$status = "release_status_success"}}
                 {{$statusD = "d_release_status_success"}}
+                {{$statusL = $status_success}}
             {{else if eq $release.Status "В исполнении"}}
                 {{$status = "release_status_pending"}}
                 {{$statusD = "d_release_status_pending"}}
+                {{$statusL = $status_pending}}
             {{else if eq $release.Status "Отменен"}}
                 {{$status = "release_status_canceled"}}
                 {{$statusD = "d_release_status_canceled"}}
+                {{$statusL = $status_canceled}}
             {{end}}
             <div class="release" id="{{$statusD}}">
                 <div>
@@ -23,17 +33,17 @@
                          class="release_cover">
                 </div>
                 <div>
-                    <p class="{{$status}}">{{print $release.Status}}</p>
+                    <p class="{{$status}}">{{print $statusL}}</p>
                     <p class="release_name">{{print $release.Name}}</p>
                     <p class="release_authors">{{print $release.Authors}}</p>
                     <p class="release_date">{{print $release.ReleaseDate}}</p>
-                    <a href="/release/{{$release.Id}}" class="btn btn-primary">Открыть </a>
+                    <a href="/release/{{$release.Id}}" class="btn btn-primary">{{print $more}}</a>
                 </div>
             </div>
         {{else}}
             <div class="d-flex justify-content-evenly" style="margin: 25px;">
                 <div>
-                    <h5 class="card-title">Релизов пока нет :(</h5>
+                    <h5 class="card-title">{{print $no_releases}}</h5>
                 </div>
             </div>
         {{end}}
@@ -41,7 +51,7 @@
     <!-- Button trigger modal -->
     <div class="d-flex justify-content-evenly" style="margin: 25px;">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Добавить новый релиз
+            {{print .locales.cabinet_upload}}
         </button>
         <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -117,5 +127,5 @@
         </script>
     </div>
     </body>
-    {{template "footer"}}
+    {{template "footer" .}}
 {{end}}

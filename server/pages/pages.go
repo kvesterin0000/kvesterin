@@ -1,6 +1,7 @@
 package pages
 
 import (
+	"github.com/wasteimage/dist/server/pages/locales"
 	"log"
 	"net/http"
 	"strings"
@@ -18,12 +19,17 @@ type pageIniter func(*Pages) Page
 type Pages struct {
 	pgService db.Service
 	tmpl      *template.Template
+	loc       *locales.Locales
 	list      map[string]Page
 }
 
 func New(service db.Service) *Pages {
 	var tmpl = template.Must(template.ParseGlob("pages/*"))
-	p := &Pages{pgService: service, tmpl: tmpl}
+	loc, err := locales.New("languages/en.json", "languages/ru.json")
+	if err != nil {
+		panic(err)
+	}
+	p := &Pages{pgService: service, tmpl: tmpl, loc: loc}
 	for _, initPage := range initPages {
 		pg := initPage(p)
 		p.AddPage(pg)

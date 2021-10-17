@@ -3,18 +3,20 @@
     {{template "nav" .}}
     <body>
     <center>
-        <img src="/resources/fuse.png" style="height: 100px; margin-top: 300px;">
-        <p class="zg" style="padding-top: 200px">Дистрибуция доступна каждому</p>
-        <p class="text-secondary">Наш сервис предоставляет высококачественную загрузку релизов на цифровые площадки</p>
-        <div class="d-flex justify-content-evenly" style="padding-top: 200px;">
-            <img src="/resources/spotify.png" style="height: 100px;">
-            <img src="/resources/apple.png" style="height: 100px;">
-            <img src="/resources/vk.jpg" style="height: 100px;">
-            <img src="/resources/boom.png" style="height: 100px;">
+        <div style="padding-top: 300px;">
+            <img src="/resources/img/logo.png" style="height: 150px;">
         </div>
-        <p class="fs-2" style="padding-top: 300px">C чего начать?</p>
+        <p class="zg" style="padding-top: 200px">{{print .locales.title}}</p>
+        <p class="text-secondary">{{print .locales.desc}}</p>
+        <div class="d-flex justify-content-evenly" style="padding-top: 200px;">
+            <img src="/resources/img/spotify.png" style="height: 100px;">
+            <img src="/resources/img/apple.png" style="height: 100px;">
+            <img src="/resources/img/vk.png" style="height: 100px;">
+            <img src="/resources/img/boom.png" style="height: 100px;">
+        </div>
+        <p class="fs-2" style="padding-top: 300px">{{print .locales.start}}</p>
     </center>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>
-    {{template "footer"}}
+    {{template "footer" .}}
 {{end}}
