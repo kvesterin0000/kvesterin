@@ -2,25 +2,26 @@
     {{template "header" .}}
     {{template "nav" .}}
     <body>
-    <center>
-        <p class="zg" style="padding-top: 100px">Добавление релиза</p>
+    <p class="zg" style="padding-top: 150px; text-align: center;">Добавление релиза</p>
+    <div class="upload_box">
         <label>
-            <img src="/resources/img/cover.png" style="height: 250px;">
-            <input type="file" hidden>
+            <img src="/resources/img/{{print .cover}}" class="cover">
+            <input type="file" accept="image/jpeg" hidden>
         </label><br><br>
-        <div>
-            <span class="fs-5">Релиз: </span>
-            <span class="fs-5">{{.releaseName}}</span>
+        <div class="upload_name_box">
+            <p class="upload_rel_name">{{.releaseName}}</p>
         </div>
         <br>
         <div>
-            <span class="fs-5">Исполнители: </span>
-            <span class="fs-5">{{.perfs}}</span>
+            <p class="upload_rel_perfs">{{.perfs}}</p>
         </div>
         <br>
-        <button type="button" class="btn btn-{{print .color}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-            Добавить трек
-        </button>
+        <div class="track_box">
+            <button type="button" class="btn btn-{{print .color}}" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop1">
+                Добавить трек
+            </button>
+        </div>
         <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -39,7 +40,7 @@
                                    aria-label="default input example" style="margin-bottom: 25px;">
                             <div class="mb-3">
                                 <label for="formFile" class="form-label" style="">Добавьте wav-файл</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" id="formFile" accept="audio/vnd.3gpp.iufp">
                                 <p class="text-muted">Файл должен быть в формате .wav 44100ghz 16bit stereo.</p>
                             </div>
                             <input class="form-control" type="text" placeholder="ФИО Исполнителя (исполнителей)"
@@ -52,7 +53,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-{{print .color}}" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-{{print .color}}" data-bs-dismiss="modal"
+                                    data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop2">Далее
                             </button>
                         </div>
@@ -98,7 +100,7 @@
                 </div>
             </div>
         </div>
-    </center>
+    </div>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>
     {{template "footer" .}}

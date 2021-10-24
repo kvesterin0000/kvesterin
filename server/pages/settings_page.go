@@ -18,18 +18,18 @@ func init() {
 			var currentTheme string
 			var navLogo string
 			var colorTheme string
-			var val int
+			var val string
 			theme := readTheme(r)
 			if theme == "SGreen" {
 				currentTheme = "style_black.css"
 				navLogo = "logo_white.png"
 				colorTheme = "success"
-				val = 1
+				val = "checked"
 			} else {
 				currentTheme = "style.css"
 				navLogo = "logo.png"
 				colorTheme = "primary"
-				val = 2
+				val = ""
 			}
 			if userId <= 0 {
 				http.Redirect(rw, r, "../login", http.StatusSeeOther)
@@ -80,7 +80,7 @@ func init() {
 				}
 			case "email_confirmation":
 			case "change_theme":
-				if r.FormValue("theme") == "1" {
+				if r.FormValue("theme") == "on" {
 					session := http.Cookie{
 						Name:    themeCookie,
 						Value:   "SGreen",
@@ -99,6 +99,7 @@ func init() {
 					http.SetCookie(rw, &trashCookie)
 				}
 			}
+			fmt.Println(r.FormValue("theme"))
 			http.Redirect(rw, r, "../settings/", http.StatusFound)
 		}
 		return &pg

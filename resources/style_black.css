@@ -236,6 +236,26 @@ body {
     color: rgb(74, 199, 82);
 }
 
+#staticBackdrop {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: rgb(6, 8, 6);
+    border-radius: 20px;
+}
+
+.modal-title {
+    color: rgba(255,255,255,0.6);
+}
+.modal-header {
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+.modal-footer {
+    border-top: 2px solid rgba(255,255,255,0.2);
+}
+
+
 /*settings page*/
 
 .settings_elements {
@@ -267,19 +287,21 @@ body {
     margin-bottom: 100px;
 }
 
-.range_theme {
-    width: 300px;
-    margin-left: 100px;
-}
-
-#customRange3 {
-
-}
-
 #btn_save {
     width: 130px;
     margin-left: 140px;
+    margin-top: 50px;
 }
+
+.settings_dark {
+    font-size: 25px;
+    margin-left: 10px;
+}
+#dark_box{
+    width: 198px;
+    margin: 0 auto;
+}
+
 
 /*release info and track list*/
 
@@ -347,6 +369,55 @@ body {
     margin-left: 100px;
 }
 
+
+/*upload*/
+
+.upload_box {
+    width: 900px;
+    margin: 25px auto;
+    padding-top: 50px;
+    border: 10px solid rgba(255,255,255,0.05);
+    border-radius: 50px;
+}
+
+.upload_box:hover {
+    background: rgba(255,255,255,0.05);
+    border: 10px solid rgba(255,255,255,0.1);
+}
+
+.cover {
+    height: 300px;
+    margin-left: 300px;
+    border-radius: 30px;
+}
+
+.cover:hover {
+    background-color: rgba(255,255,255,0.05);
+    cursor: pointer;
+}
+
+.upload_rel_name {
+    font-size: 30px;
+    text-align: center;
+}
+
+.upload_name_box {
+    width: 500px;
+    margin-left: 200px;
+    border-bottom: 2px solid rgba(74, 199, 82, 0.2);
+}
+
+.upload_rel_perfs {
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+}
+
+.track_box {
+    width: 600px;
+    margin-left: 150px;
+    padding-bottom: 25px;
+}
+
 /*login and register boxes*/
 
 .login_box {
@@ -412,41 +483,6 @@ input[type=text]:focus {
 input[type=password] {
     font-size: 20px;
 }
-
-input[type=password]:focus {
-    box-shadow: none;
-}
-
-.wrong {
-    display: none;
-    margin: 0 auto;
-    background-color: rgba(222, 53, 53, 0.2);
-    width: 500px;
-    height: 60px;
-    border-radius: 20px;
-}
-
-.wrong p {
-    text-align: center;
-    padding-top: 15px;
-    color: rgba(222, 53, 53, 1);
-}
-
-.warning {
-    display: none;
-    margin: 0 auto;
-    background-color: rgba(212, 203, 44, 0.2);
-    width: 500px;
-    height: 60px;
-    border-radius: 20px;
-}
-
-.warning p {
-    text-align: center;
-    padding-top: 15px;
-    color: rgba(212, 203, 44, 1);
-}
-
 /*prices accordion*/
 
 .accordion {
@@ -499,8 +535,13 @@ input[type=password]:focus {
     padding-top: 75px;
     width: 900px;
     margin: 0 auto;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
+    border-radius: 50px;
+    border: 10px solid rgba(255,255,255,0.05);
+}
+
+.request:hover {
+    background-color: rgba(255,255,255,0.05);
+    border: 10px solid rgba(255,255,255,0.1);
 }
 
 /*footer*/
@@ -542,6 +583,11 @@ p {
     font-size: 20px;
 }
 
+span {
+    color: white;
+    font-size: 20px;
+}
+
 .zg {
     color: white;
     font-size: 30px;
@@ -566,6 +612,55 @@ p {
     border-radius: 20px;
 }
 
-.checkbox {
-    transform: scale(1.5);
+input[type=checkbox] {
+    margin-top: 8px;
+    padding-top: 20px;
+    padding-left: 50px;
+}
+
+/*info messages*/
+
+.wrong {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(222, 53, 53, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.wrong p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(222, 53, 53, 1);
+}
+
+.warning {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(212, 203, 44, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.warning p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(212, 203, 44, 1);
+}
+
+.success {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(54, 209, 54, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.success p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(54, 209, 54, 1);
 }

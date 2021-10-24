@@ -11,6 +11,8 @@ func init() {
 	// request Page
 	initPages = append(initPages, func(p *Pages) Page {
 		var pg page
+		var sent string
+		var warning string
 		pg.name = requestPage
 		pg.get = func(rw http.ResponseWriter, r *http.Request) {
 			userId := readSession(r)
@@ -40,7 +42,11 @@ func init() {
 				"theme":    currentTheme,
 				"nav_logo": navLogo,
 				"color":    colorTheme,
+				"warning":  warning,
+				"success":  sent,
 			}
+			sent = "display: none;"
+			warning = "display: none;"
 			if userId <= 0 {
 				http.Redirect(rw, r, "../login", http.StatusSeeOther)
 			}
@@ -48,6 +54,18 @@ func init() {
 			if err != nil {
 				fmt.Println(err)
 			}
+		}
+		pg.post = func(rw http.ResponseWriter, r *http.Request) {
+			release := r.FormValue("release")
+			request := r.FormValue("request")
+			if len(release) < 1 || len(request) < 1 {
+				warning = "display: block;"
+				http.Redirect(rw, r, "/request/", http.StatusFound)
+			} else {
+				sent = "display: block;"
+				http.Redirect(rw, r, "/request/", http.StatusFound)
+			}
+			return
 		}
 		return &pg
 	})

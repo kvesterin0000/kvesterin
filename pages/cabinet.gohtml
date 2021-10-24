@@ -80,18 +80,17 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Добавление релиза</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form method="post" action="/upload/">
                         <div class="modal-body">
-                            <div class="PerformerList" id="PerformerList">
+                            <div class="PerformerList" id="PerformerList" style="padding-top: 20px;">
                                 <div class="Performer" style="display: flex;">
                                     <input class="form-control" id="Perf" name="perf" type="text"
                                            placeholder="Исполнитель"
                                            aria-label="default input example"
                                            style="margin-bottom: 25px; margin-right: 25px; ">
                                     <button type="button" class="btn btn-{{print $color}}" id="addPerf"
-                                            style="height: 38px; width: 38px;">+
+                                            style="height: 45px; width: 45px;">+
                                     </button>
                                 </div>
                             </div>
@@ -113,7 +112,7 @@
             var PerformerPt1 = `<div class="PerformerElement" style="display: flex;" id="Perf`
             var PerformerPt2 = `" > <input class="form-control" type="text" name="perf" placeholder="Исполнитель"`
                 + ` aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
-            <button type="button" class="btn btn-danger" id="removePerf" style="height: 38px; width: 38px;">-</button>
+            <button type="button" class="btn btn-secondary" id="removePerf" style="height: 45px; width: 45px;">-</button>
             </div>`;
 
             function addPerformer() {

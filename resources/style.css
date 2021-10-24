@@ -243,15 +243,14 @@
     margin: 50px 25px 25px 25px;
     width: 500px;
     height: 700px;
-    background-color: rgba(0, 0, 0, 0.05);
     padding-top: 100px;
     border-radius: 50px;
-    border: 10px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
 }
 
 .s_element:hover {
     transition-duration: 0.5s;
-    background-color: rgba(0, 0, 0, 0.10);
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.2);
 }
 
 .s_element p {
@@ -261,18 +260,22 @@
     color: rgba(0, 0, 0, 0.4);
     margin-bottom: 100px;
 }
-.range_theme {
-    width: 300px;
-    margin-left: 100px;
-}
 
-#customRange3 {
-
-}
 #btn_save {
     width: 130px;
     margin-left: 140px;
+    margin-top: 50px;
 }
+
+.settings_dark {
+    font-size: 25px;
+    margin-left: 10px;
+}
+#dark_box{
+    width: 198px;
+    margin: 0 auto;
+}
+
 
 /*release info and track list*/
 
@@ -340,6 +343,49 @@
     margin-left: 100px;
 }
 
+/*upload*/
+
+.upload_box {
+    width: 900px;
+    margin: 25px auto;
+    padding-top: 50px;
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
+    border-radius: 50px;
+}
+
+.cover {
+    height: 300px;
+    margin-left: 300px;
+    border-radius: 30px;
+}
+
+.cover:hover {
+    background-color: rgba(0,0,0,0.01);
+    cursor: pointer;
+}
+
+.upload_rel_name {
+    font-size: 30px;
+    text-align: center;
+}
+
+.upload_name_box {
+    width: 500px;
+    margin-left: 200px;
+    border-bottom: 2px solid rgba(255, 127, 80, 0.2);
+}
+
+.upload_rel_perfs {
+    text-align: center;
+    color: rgba(0,0,0,0.8);
+}
+
+.track_box {
+    width: 600px;
+    margin-left: 150px;
+    padding-bottom: 25px;
+}
+
 /*login and register boxes*/
 
 .login_box {
@@ -393,36 +439,6 @@ input[type=password] {
     font-size: 20px;
 }
 
-.wrong {
-    display: none;
-    margin: 0 auto;
-    background-color: rgba(222, 53, 53, 0.2);
-    width: 500px;
-    height: 60px;
-    border-radius: 20px;
-}
-
-.wrong p {
-    text-align: center;
-    padding-top: 15px;
-    color: rgba(222, 53, 53, 1);
-}
-
-.warning {
-    display: none;
-    margin: 0 auto;
-    background-color: rgba(212, 203, 44, 0.2);
-    width: 500px;
-    height: 60px;
-    border-radius: 20px;
-}
-
-.warning p {
-    text-align: center;
-    padding-top: 15px;
-    color: rgba(212, 203, 44, 1);
-}
-
 /*prices accordion*/
 
 .accordion {
@@ -457,7 +473,7 @@ input[type=password] {
     padding-top: 75px;
     width: 900px;
     margin: 0 auto;
-    border-radius: 5px;
+    border-radius: 50px;
     box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
 }
 
@@ -498,6 +514,11 @@ p {
     font-size: 20px;
 }
 
+span {
+    color: rgba(0,0,0,0.8);
+    font-size: 20px;
+}
+
 .zg {
     font-size: 30px;
 }
@@ -521,6 +542,55 @@ p {
     border-radius: 20px;
 }
 
-.checkbox {
-    transform: scale(1.5);
+input[type=checkbox] {
+    margin-top: 8px;
+    padding-top: 20px;
+    padding-left: 50px;
+}
+
+/*info messages*/
+
+.wrong {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(222, 53, 53, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.wrong p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(222, 53, 53, 1);
+}
+
+.warning {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(212, 203, 44, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.warning p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(212, 203, 44, 1);
+}
+
+.success {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(54, 209, 54, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.success p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(54, 209, 54, 1);
 }

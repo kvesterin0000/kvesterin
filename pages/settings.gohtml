@@ -24,7 +24,8 @@
                     <input type="password" name="password_new2" class="form-control">
                 </div>
                 <div class="btn_box">
-                    <input type="submit" value="{{print .locales.settings_btn_change}}" class="btn btn-{{print .color}}">
+                    <input type="submit" value="{{print .locales.settings_btn_change}}"
+                           class="btn btn-{{print .color}}">
                 </div>
             </form>
         </div>
@@ -37,7 +38,8 @@
                     <input type="email" name="email" class="form-control" value="{{print .email}}">
                 </div>
                 <div class="btn_box">
-                    <input type="submit" value="{{print .locales.settings_btn_submit}}" class="btn btn-{{print .color}}">
+                    <input type="submit" value="{{print .locales.settings_btn_submit}}"
+                           class="btn btn-{{print .color}}">
                 </div>
             </form>
         </div>
@@ -46,10 +48,12 @@
                 <input name="form_name" type="hidden" value="change_theme">
                 <p>Цветовая схема</p>
                 <div class="range_theme">
-                    <label for="customRange3" style="text-align: start">Special Green</label>
-                    <label for="customRange3" style="margin-left: 60px">White Corals</label>
                     <br>
-                    <input type="range" class="form-range" min="1" max="2" step="1" name="theme" value="{{print .val}}">
+                    <div class="form-check form-switch" id="dark_box">
+                        <span class="settings_dark">Dark Theme</span>
+                        <input type="checkbox" class="form-check-input"  id="flexSwitchCheckDefault" name="theme"
+                               {{print .val}}>
+                    </div>
                 </div>
                 <div class="btn_box">
                     <input type="submit" value="Сохранить" class="btn btn-{{print .color}}" id="btn_save">

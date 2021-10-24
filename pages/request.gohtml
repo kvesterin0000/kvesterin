@@ -4,36 +4,22 @@
     <body>
     <p class="zg" style="padding-top: 150px; text-align: center;">{{print .locales.request_p}}</p>
     <div class="request">
-        <form>
+        <form method="post" action="/request/ ">
             <div class="request_box">
                 <label>{{print .locales.request_release_name}}</label>
-                <input class="form-control form-control-lg" type="text" style="margin-bottom: 20px;">
+                <input class="form-control form-control-lg" type="text" style="margin-bottom: 20px;" name="release">
                 <label>{{print .locales.request_text}}</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
-                          style="margin-bottom: 20px;"></textarea>
+                          style="margin-bottom: 20px;" name="request"></textarea>
             </div>
-            <button type="button" class="btn btn-{{print .color}}" data-bs-dismiss="modal" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop" id="formBtn">{{print .locales.request_send}}
-            </button>
+            <input type="submit" value="{{print .locales.request_send}}" class="btn btn-{{print .color}}" id="formBtn">
         </form>
     </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">{{print .locales.request_success}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <label for="formFile" class="form-label" style="">{{print .locales.request_sent}}</label>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" onclick="window.location.href = '{{"cabinet"}}';"
-                           value="{{print .locales.request_btn_success}}" class="btn btn-{{print .color}}">
-                </div>
-            </div>
-        </div>
+    <div class="success" style="{{print .success}} width: 900px; margin-top: 20px;">
+        <p>Запрос успешно отправлен</p>
+    </div>
+    <div class="warning" style="{{print .warning}} width: 900px; margin-top: 20px;">
+        <p>Вы не ввели название релиза или запрос</p>
     </div>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>
