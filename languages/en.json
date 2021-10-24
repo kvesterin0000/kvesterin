@@ -55,7 +55,7 @@
     "prices_ep_st": "Uploading costs 3$ for each track in release."
   },
   {
-    "prices_ep_p": "EP - 2-4 tracks.\nYour release will be on streaming services within 1-3 days. Artist card will be generated after first upload. Your earnings 70%."
+    "prices_ep_p": "EP - 2-4 tracks. Your release will be on streaming services within 1-3 days. Artist card will be generated after first upload. Your earnings 70%."
   },
   {
     "prices_album": "Album Upload"
@@ -64,7 +64,7 @@
     "prices_album_st": "Uploading costs 2$ for each track in release."
   },
   {
-    "prices_album_p": "Album - 5+ tracks.\nYour release will be on streaming services within 1-3 days. Artist card will be generated after first upload. Your earnings 70%."
+    "prices_album_p": "Album - 5+ tracks. Your release will be on streaming services within 1-3 days. Artist card will be generated after first upload. Your earnings 70%."
   },
 
 
@@ -101,6 +101,9 @@
     "cabinet_p": "Release manager"
   },
   {
+    "cabinet_settings": "Settings"
+  },
+  {
     "cabinet_more": "More"
   },
   {
@@ -120,6 +123,32 @@
   },
   {
     "status_canceled": "Canceled"
+  },
+
+
+  {
+    "settings_change_pass": "Change password"
+  },
+  {
+    "settings_old_pass": "Old password"
+  },
+  {
+    "settings_new_pass": "New password"
+  },
+  {
+    "settings_new_pass2": "Reenter new password"
+  },
+  {
+    "settings_btn_change": "Change"
+  },
+  {
+    "settings_email_conf": "Email confirmation"
+  },
+  {
+    "settings_email": "EMail"
+  },
+  {
+    "settings_btn_submit": "Submit"
   },
 
 

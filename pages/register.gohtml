@@ -1,5 +1,5 @@
 {{define "register"}}
-    {{template "header"}}
+    {{template "header" .}}
     {{template "nav" .}}
     <body>
     <p class="zg" style="padding: 150px 0 20px 0; text-align: center;">{{print .locales.reg_p}}</p>
@@ -18,11 +18,17 @@
                 <input type="password" name="password" class="form-control">
             </div>
             <div class="btn_box">
-                <input type="submit" value="{{print .locales.reg_complete}}" class="btn btn-primary">
+                <input type="submit" value="{{print .locales.reg_complete}}" class="btn btn-{{print .color}}">
                 <input type="button" onclick="window.location.href = '../login';"
                        value="{{print .locales.reg_login}}" class="btn btn-light">
             </div>
         </form>
+    </div>
+    <div class="wrong" style="{{print .wrong}}">
+        <p>Длина пароля должна быть не менее 8 символов</p>
+    </div>
+    <div class="warning" style="{{print .warning}}">
+        <p>Одно или несколько полей не заполнены</p>
     </div>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>

@@ -27,6 +27,7 @@ type Service interface {
 	GetReleaseByUserId(int) ([]*Release, error)
 	GetReleaseById(int) (*Release, error)
 	GetTrackByReleaseId(int) ([]*Track, error)
+	UpdatePassword(int, string, string) error
 }
 
 type service struct {
@@ -104,6 +105,23 @@ func (s *service) GetUser(id int) (*User, error) {
 
 	}
 	return &user, nil
+}
+
+func (s *service) UpdatePassword(id int, password, newPassword string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
+	defer cancel()
+	user, err := s.GetUser(id)
+	if err != nil {
+		return fmt.Errorf("error get user: %w", err)
+	}
+	if hashPass(password) == user.Password {
+		_, err := s.db.QueryContext(ctx,
+			fmt.Sprintf("update users set password = '%s' where user_id='%d'", hashPass(newPassword), id))
+		if err != nil {
+			return fmt.Errorf("error update user password: %w", err)
+		}
+	}
+	return nil
 }
 
 func (s *service) NewRelease(userId int, name, authors, status string) error {

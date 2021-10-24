@@ -10,7 +10,10 @@ import (
 	"github.com/wasteimage/dist/server/db"
 )
 
-const sessionCookie = "sessionId"
+const (
+	sessionCookie = "sessionId"
+	themeCookie   = "SpecGreen"
+)
 
 var initPages []pageIniter
 
@@ -66,11 +69,19 @@ func (p *Pages) GetHandler() http.Handler {
 }
 
 func (p *Pages) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
-	uri := strings.SplitN(r.RequestURI, "/", 3)
-	if len(uri) < 2 {
-		return
+	var (
+		root     = "/"
+		pageName string
+	)
+	if r.RequestURI == root {
+		pageName = indexPage
+	} else {
+		uri := strings.SplitN(r.RequestURI, "/", 3)
+		if len(uri) < 2 {
+			return
+		}
+		pageName = uri[1]
 	}
-	pageName := uri[1]
 	page := p.GetPage(pageName)
 	if page == nil {
 		rw.WriteHeader(http.StatusNoContent)

@@ -1,12 +1,12 @@
 {{define "nav"}}
     <nav>
         <div id="nav_panel">
-            <div class="left_nav" onclick="window.location.href = '../index/';">
-                <img id="logo" src="../resources/img/logo.png">
-                <p class="left_link" href="{{.pages.index.BackTo}}">FUSE</p>
+            <div class="left_nav" onclick="window.location.href = '../';">
+                <img id="logo" src="../resources/img/{{print .nav_logo}}">
+                <p class="left_link">FUSE</p>
             </div>
             <div class="right_nav">
-                <a href="{{.pages.index.BackTo}}">{{print .locales.nav_main}}</a>
+                <a href="../">{{print .locales.nav_main}}</a>
                 <a href="{{.pages.prices.BackTo}}">{{print .locales.nav_prices}}</a>
                 <p class="cabinet" onclick="menu()">{{print .locales.nav_profile}}</p>
                 {{if .loggedIn}}
@@ -21,6 +21,9 @@
                     </div>
                 {{end}}
             </div>
+        </div>
+        <div class="mobile_menu">
+            <p>Пошел нахуй</p>
         </div>
     </nav>
     {{/*    <nav class="navbar navbar-expand-lg navbar-light bg-light">*/}}

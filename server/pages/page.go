@@ -42,6 +42,14 @@ func (p *page) Post(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func readTheme(r *http.Request) string {
+	session, err := r.Cookie(themeCookie)
+	if err != nil {
+		return ""
+	}
+	return session.Value
+}
+
 func readSession(r *http.Request) int {
 	session, err := r.Cookie(sessionCookie)
 	if err != nil {

@@ -11,10 +11,10 @@
 }
 
 .link-primary {
-  color: #0d6efd;
+  color: #ff7f50;
 }
 .link-primary:hover, .link-primary:focus {
-  color: #0a58ca;
+  color: #ff9973;
 }
 
 .link-secondary {
@@ -25,10 +25,10 @@
 }
 
 .link-success {
-  color: #198754;
+  color: #4ac752;
 }
 .link-success:hover, .link-success:focus {
-  color: #146c43;
+  color: #6ed275;
 }
 
 .link-info {
@@ -426,7 +426,7 @@
 }
 
 .border-primary {
-  border-color: #0d6efd !important;
+  border-color: #ff7f50 !important;
 }
 
 .border-secondary {
@@ -434,7 +434,7 @@
 }
 
 .border-success {
-  border-color: #198754 !important;
+  border-color: #4ac752 !important;
 }
 
 .border-info {
@@ -1330,7 +1330,7 @@
 
 /* rtl:end:remove */
 .text-primary {
-  color: #0d6efd !important;
+  color: #ff7f50 !important;
 }
 
 .text-secondary {
@@ -1338,7 +1338,7 @@
 }
 
 .text-success {
-  color: #198754 !important;
+  color: #4ac752 !important;
 }
 
 .text-info {
@@ -1386,7 +1386,7 @@
 }
 
 .bg-primary {
-  background-color: #0d6efd !important;
+  background-color: #ff7f50 !important;
 }
 
 .bg-secondary {
@@ -1394,7 +1394,7 @@
 }
 
 .bg-success {
-  background-color: #198754 !important;
+  background-color: #4ac752 !important;
 }
 
 .bg-info {
@@ -1462,7 +1462,7 @@
 }
 
 .rounded {
-  border-radius: 0.25rem !important;
+  border-radius: 1rem !important;
 }
 
 .rounded-0 {
@@ -1474,7 +1474,7 @@
 }
 
 .rounded-2 {
-  border-radius: 0.25rem !important;
+  border-radius: 1rem !important;
 }
 
 .rounded-3 {
@@ -1490,23 +1490,23 @@
 }
 
 .rounded-top {
-  border-top-left-radius: 0.25rem !important;
-  border-top-right-radius: 0.25rem !important;
+  border-top-left-radius: 1rem !important;
+  border-top-right-radius: 1rem !important;
 }
 
 .rounded-end {
-  border-top-right-radius: 0.25rem !important;
-  border-bottom-right-radius: 0.25rem !important;
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
 }
 
 .rounded-bottom {
-  border-bottom-right-radius: 0.25rem !important;
-  border-bottom-left-radius: 0.25rem !important;
+  border-bottom-right-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
 }
 
 .rounded-start {
-  border-bottom-left-radius: 0.25rem !important;
-  border-top-left-radius: 0.25rem !important;
+  border-bottom-left-radius: 1rem !important;
+  border-top-left-radius: 1rem !important;
 }
 
 .visible {

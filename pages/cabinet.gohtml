@@ -1,9 +1,13 @@
 {{define "cabinet"}}
-    {{template "header"}}
+    {{template "header" .}}
     {{template "nav" .}}
     <body>
-        <p class="zg" style="padding-top: 150px; text-align: center">{{print .locales.cabinet_p}}</p>
+    <div class="cabinet_menu">
+        <a href="{{.pages.cabinet.BackTo}}" class="cabinet_link">{{print .locales.cabinet_p}}</a>
+        <a href="{{.pages.settings.BackTo}}" class="cabinet_link">{{print .locales.cabinet_settings}}</a>
+    </div>
     <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        {{$color := .color}}
         {{$more := .locales.cabinet_more}}
         {{$no_releases := .locales.cabinet_no_releases}}
         {{$status_default := .locales.status_default}}
@@ -37,7 +41,7 @@
                     <p class="release_name">{{print $release.Name}}</p>
                     <p class="release_authors">{{print $release.Authors}}</p>
                     <p class="release_date">{{print $release.ReleaseDate}}</p>
-                    <a href="/release/{{$release.Id}}" class="btn btn-primary">{{print $more}}</a>
+                    <a href="/release/{{$release.Id}}" class="btn btn-{{print $color}}">{{print $more}}</a>
                 </div>
             </div>
         {{else}}
@@ -50,7 +54,7 @@
     </div>
     <!-- Button trigger modal -->
     <div class="d-flex justify-content-evenly" style="margin: 25px;">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" class="btn btn-{{print $color}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             {{print .locales.cabinet_upload}}
         </button>
         <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -86,7 +90,7 @@
                                            placeholder="Исполнитель"
                                            aria-label="default input example"
                                            style="margin-bottom: 25px; margin-right: 25px; ">
-                                    <button type="button" class="btn btn-primary" id="addPerf"
+                                    <button type="button" class="btn btn-{{print $color}}" id="addPerf"
                                             style="height: 38px; width: 38px;">+
                                     </button>
                                 </div>
@@ -96,7 +100,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <input type="submit" value="Далее" class="btn btn-primary">
+                            <input type="submit" value="Далее" class="btn btn-{{print $color}}">
                         </div>
                     </form>
                 </div>
@@ -108,7 +112,7 @@
             var PerfId = 0;
             var PerformerPt1 = `<div class="PerformerElement" style="display: flex;" id="Perf`
             var PerformerPt2 = `" > <input class="form-control" type="text" name="perf" placeholder="Исполнитель"`
-                           +` aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
+                + ` aria-label="default input example" style="margin-bottom: 25px; margin-right: 25px; ">
             <button type="button" class="btn btn-danger" id="removePerf" style="height: 38px; width: 38px;">-</button>
             </div>`;
 
@@ -119,8 +123,8 @@
                 node.innerHTML = PerformerPt1 + currentPerfId + PerformerPt2;
                 document.getElementById('PerformerList').appendChild(node);
                 node.querySelector("button").addEventListener("click", function (e) {
-                        e.target.parentElement.parentElement.remove();
-                    });
+                    e.target.parentElement.parentElement.remove();
+                });
             }
 
             document.getElementById('addPerf').addEventListener("click", addPerformer);

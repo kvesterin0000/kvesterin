@@ -1,10 +1,10 @@
 {{define "index"}}
-    {{template "header"}}
+    {{template "header" .}}
     {{template "nav" .}}
     <body>
     <center>
         <div style="padding-top: 300px;">
-            <img src="/resources/img/logo.png" style="height: 150px;">
+            <img src="/resources/img/{{print .nav_logo}}" style="height: 150px;">
         </div>
         <p class="zg" style="padding-top: 200px">{{print .locales.title}}</p>
         <p class="text-secondary">{{print .locales.desc}}</p>
@@ -14,7 +14,7 @@
             <img src="/resources/img/vk.png" style="height: 100px;">
             <img src="/resources/img/boom.png" style="height: 100px;">
         </div>
-        <p class="fs-2" style="padding-top: 300px">{{print .locales.start}}</p>
+        <p class="zg" style="padding-top: 300px">{{print .locales.start}}</p>
     </center>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>

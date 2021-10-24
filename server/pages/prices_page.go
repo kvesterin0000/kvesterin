@@ -14,6 +14,22 @@ func init() {
 		pg.name = pricesPage
 		pg.get = func(rw http.ResponseWriter, r *http.Request) {
 			userId := readSession(r)
+			var currentTheme string
+			var navLogo string
+			var colorTheme string
+			var pointer string
+			theme := readTheme(r)
+			if theme == "SGreen" {
+				currentTheme = "style_black.css"
+				navLogo = "logo_white.png"
+				colorTheme = "success"
+				pointer = "strelka_white.png"
+			} else {
+				currentTheme = "style.css"
+				navLogo = "logo.png"
+				colorTheme = "primary"
+				pointer = "strelka.png"
+			}
 			locales, err := p.loc.TranslatePage(r.Header.Get("Accept-Language"),
 				"prices_where", "prices_lower", "prices_single", "prices_single_st", "prices_single_p",
 				"prices_ep", "prices_ep_st", "prices_ep_p", "prices_album", "prices_album_st", "prices_album_p",
@@ -24,6 +40,10 @@ func init() {
 				"loggedIn": userId > 0,
 				"pages":    p.GetPagesInfo(),
 				"locales":  locales,
+				"theme":    currentTheme,
+				"nav_logo": navLogo,
+				"color":    colorTheme,
+				"pointer":  pointer,
 			}
 			err = p.tmpl.Lookup("prices").Execute(rw, params)
 			if err != nil {

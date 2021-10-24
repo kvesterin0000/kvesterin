@@ -1,0 +1,63 @@
+{{define "settings"}}
+    {{template "header" .}}
+    {{template "nav" .}}
+    <body>
+    <div class="cabinet_menu">
+        <a href="{{.pages.cabinet.BackTo}}" class="cabinet_link">{{print .locales.cabinet_p}}</a>
+        <a href="{{.pages.settings.BackTo}}" class="cabinet_link">{{print .locales.cabinet_settings}}</a>
+    </div>
+    <div class="settings_elements">
+        <div class="s_element">
+            <form method="post" action="/settings/">
+                <input name="form_name" type="hidden" value="change_password">
+                <p>{{print .locales.settings_change_pass}}</p>
+                <div class="pass_box">
+                    <label>{{print .locales.settings_old_pass}}</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                <div class="pass_box">
+                    <label>{{print .locales.settings_new_pass}}</label>
+                    <input type="password" name="password_new1" class="form-control">
+                </div>
+                <div class="pass_box">
+                    <label>{{print .locales.settings_new_pass2}}</label>
+                    <input type="password" name="password_new2" class="form-control">
+                </div>
+                <div class="btn_box">
+                    <input type="submit" value="{{print .locales.settings_btn_change}}" class="btn btn-{{print .color}}">
+                </div>
+            </form>
+        </div>
+        <div class="s_element">
+            <form method="post" action="/settings/">
+                <input name="form_name" type="hidden" value="email_confirmation">
+                <p>{{print .locales.settings_email_conf}}</p>
+                <div class="pass_box" style="margin-top: 150px;">
+                    <label>{{print .locales.settings_email}}</label>
+                    <input type="email" name="email" class="form-control" value="{{print .email}}">
+                </div>
+                <div class="btn_box">
+                    <input type="submit" value="{{print .locales.settings_btn_submit}}" class="btn btn-{{print .color}}">
+                </div>
+            </form>
+        </div>
+        <div class="s_element">
+            <form method="post" action="/settings/">
+                <input name="form_name" type="hidden" value="change_theme">
+                <p>Цветовая схема</p>
+                <div class="range_theme">
+                    <label for="customRange3" style="text-align: start">Special Green</label>
+                    <label for="customRange3" style="margin-left: 60px">White Corals</label>
+                    <br>
+                    <input type="range" class="form-range" min="1" max="2" step="1" name="theme" value="{{print .val}}">
+                </div>
+                <div class="btn_box">
+                    <input type="submit" value="Сохранить" class="btn btn-{{print .color}}" id="btn_save">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
+    </body>
+    {{template "footer" .}}
+{{end}}

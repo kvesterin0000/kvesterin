@@ -1,10 +1,12 @@
-/*navigation menu*/
 
 body {
-    background-color: rgb(15, 15, 20);
+    background-color: rgb(6, 8, 6);
 }
 
+/*navigation menu*/
+
 #nav_panel {
+    z-index: 999;
     position: fixed;
     padding-top: 15px;
     width: 100%;
@@ -12,7 +14,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(20, 20, 20, 0.9);
     margin-bottom: 100px;
 }
 
@@ -23,7 +25,7 @@ body {
     justify-content: space-between;
     font-size: 30px;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .right_nav {
@@ -41,7 +43,7 @@ body {
 
 .left_link {
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 30px;
 }
 
@@ -60,12 +62,12 @@ body {
 
 .right_nav a:hover {
     transition-duration: 0.5s;
-    color: coral;
+    color: rgb(74, 199, 82);
 }
 
 .right_nav p:hover {
     transition-duration: 0.5s;
-    color: coral;
+    color: rgb(74, 199, 82);
     cursor: pointer;
 }
 
@@ -75,7 +77,7 @@ body {
     margin-top: 50px;
     margin-left: 275px;
     background-color: black;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 10px 10px 10px 10px;
 }
 
@@ -96,16 +98,32 @@ body {
 
 #logout:hover {
     transition-duration: 0.5s;
-    color: rgba(255, 127, 80, 0.8);
+    color: rgba(74, 199, 82, 0.8);;
 }
 
 .menu-content a:hover {
     transition-duration: 0.5s;
-    color: coral;
+    color: rgb(74, 199, 82);
 }
 
 .show {
     display: block;
+}
+
+.mobile_menu {
+    display: block;
+}
+
+@media screen and (max-device-width: 768px) {
+    .nav_panel {
+        display: none;
+    }
+}
+
+@media screen and (min-device-width: 768px) {
+    .mobile_menu {
+        display: none;
+    }
 }
 
 /*cabinet release block*/
@@ -117,7 +135,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     margin: 50px;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 #d_release_status_default:hover {
@@ -153,12 +171,12 @@ body {
     height: 260px;
     width: 260px;
     margin-right: 50px;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .release_date {
     font-size: 25px;
-    color: rgb(173, 173, 173);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .release_status_default {
@@ -166,7 +184,7 @@ body {
     font-size: 25px;
     color: rgba(31, 31, 31, 1);
     background-color: rgba(31, 31, 31, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -175,7 +193,7 @@ body {
     font-size: 25px;
     color: rgba(54, 209, 54, 1);
     background-color: rgba(54, 209, 54, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -184,7 +202,7 @@ body {
     font-size: 25px;
     color: rgba(212, 203, 44, 1);
     background-color: rgba(212, 203, 44, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -193,8 +211,74 @@ body {
     font-size: 25px;
     color: rgba(222, 53, 53, 1);
     background-color: rgba(222, 53, 53, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
+}
+
+.cabinet_menu {
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+    text-align: center;
+}
+
+.cabinet_link {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
+}
+
+
+.cabinet_link:hover {
+    transition-duration: 0.5s;
+    color: rgb(74, 199, 82);
+}
+
+/*settings page*/
+
+.settings_elements {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.s_element {
+    margin: 50px 25px 25px 25px;
+    width: 500px;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding-top: 100px;
+    border-radius: 50px;
+    border: 10px solid rgba(255, 255, 255, 0.08);
+}
+
+.s_element:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.s_element p {
+    max-width: 350px;
+    font-size: 30px;
+    margin-left: 50px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 100px;
+}
+
+.range_theme {
+    width: 300px;
+    margin-left: 100px;
+}
+
+#customRange3 {
+
+}
+
+#btn_save {
+    width: 130px;
+    margin-left: 140px;
 }
 
 /*release info and track list*/
@@ -203,13 +287,27 @@ body {
     margin: 50px auto;
     width: 500px;
     min-height: 750px;
-    border-radius: 5px;
+    border-radius: 50px;
+    border: 10px solid rgba(255, 255, 255, 0.05);
+}
+
+.release_info:hover {
+    transition-duration: 0.5s;);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 10px solid rgba(255, 255, 255, 0.08);
 }
 
 .t_release_name {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     font-weight: bolder;
     font-size: 50px;
+    text-align: center;
+}
+
+.t_release_date {
+    padding-bottom: 30px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 30px;
     text-align: center;
 }
 
@@ -217,7 +315,7 @@ body {
     margin-left: 75px;
     height: 350px;
     width: 350px;
-    border-radius: 5px;
+    border-radius: 20px;
     margin-bottom: 50px;
 }
 
@@ -233,7 +331,7 @@ body {
     text-align: center;
     margin: 0 auto;
     padding: 5px;
-    border-bottom: 1px solid rgba(255, 127, 80, 0.2);
+    border-bottom: 1px solid rgba(74, 199, 82, 0.2);
 }
 
 .t_release_status {
@@ -253,9 +351,14 @@ body {
 
 .login_box {
     width: 500px;
-    margin: 0 auto 500px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
+    margin: 0 auto 25px;
+    border-radius: 20px;
+    border: 10px solid rgba(255,255,255,0.05);
+}
+
+.login_box:hover {
+    background-color: rgba(255,255,255,0.05);
+    border: 10px solid rgba(255,255,255,0.1);
 }
 
 .email_box {
@@ -294,12 +397,54 @@ input[type=email] {
     font-size: 20px;
 }
 
+input[type=email]:focus {
+    box-shadow: none;
+}
+
 input[type=text] {
     font-size: 20px;
 }
 
+input[type=text]:focus {
+    box-shadow: none;
+}
+
 input[type=password] {
     font-size: 20px;
+}
+
+input[type=password]:focus {
+    box-shadow: none;
+}
+
+.wrong {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(222, 53, 53, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.wrong p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(222, 53, 53, 1);
+}
+
+.warning {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(212, 203, 44, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.warning p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(212, 203, 44, 1);
 }
 
 /*prices accordion*/
@@ -311,11 +456,29 @@ input[type=password] {
 }
 
 .accordion-button {
+    color: rgba(255, 255, 255, 0.8);
     font-size: 20px;
+    background-color: black;
+}
+
+.accordion p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.accordion-button:focus {
+    border: none;
+    box-shadow: none;
 }
 
 .accordion-body {
     font-size: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.accordion-item {
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 /*request box*/
@@ -331,20 +494,13 @@ input[type=password] {
     margin-bottom: 50px;
 }
 
-.form-control {
-    background-color: rgb(17, 17, 22);
-    color: white;
-}
-.form-control:active {
-    background-color: rgb(17, 17, 22);
-    color: white;
-}
 
 .request {
     padding-top: 75px;
     width: 900px;
     margin: 0 auto;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
 }
 
 /*footer*/
@@ -370,43 +526,46 @@ input[type=password] {
 
 .footer_info a:hover {
     transition-duration: 0.5s;
-    color: coral;
-}
-
-.footer_info img {
-    margin-top: 25px;
-    width: 150px;
-    height: 50px;
+    color: rgb(74, 199, 82);
 }
 
 
 /*size const*/
 
 label {
-    font-size: 20px;
     color: white;
+    font-size: 20px;
 }
 
 p {
-    font-size: 20px;
     color: white;
+    font-size: 20px;
 }
 
 .zg {
-    font-size: 30px;
     color: white;
+    font-size: 30px;
 }
 
 /*buttons*/
 
 .btn {
     font-size: 20px;
+    border-radius: 20px;
 }
 
 .btn-primary {
-    color: black;
+    color: white;
 }
 
 .btn-primary:hover {
-    color: black;
+    color: rgb(240, 240, 240);
+}
+
+.form-control {
+    border-radius: 20px;
+}
+
+.checkbox {
+    transform: scale(1.5);
 }

@@ -1,5 +1,5 @@
 {{define "request"}}
-    {{template "header"}}
+    {{template "header" .}}
     {{template "nav" .}}
     <body>
     <p class="zg" style="padding-top: 150px; text-align: center;">{{print .locales.request_p}}</p>
@@ -12,7 +12,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
                           style="margin-bottom: 20px;"></textarea>
             </div>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal"
+            <button type="button" class="btn btn-{{print .color}}" data-bs-dismiss="modal" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop" id="formBtn">{{print .locales.request_send}}
             </button>
         </form>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" onclick="window.location.href = '{{"cabinet"}}';"
-                           value="{{print .locales.request_btn_success}}" class="btn btn-primary">
+                           value="{{print .locales.request_btn_success}}" class="btn btn-{{print .color}}">
                 </div>
             </div>
         </div>

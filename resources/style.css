@@ -72,7 +72,7 @@
     margin-top: 50px;
     margin-left: 275px;
     background-color: black;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 10px 10px 10px 10px;
 }
 
@@ -105,6 +105,22 @@
     display: block;
 }
 
+.mobile_menu {
+    display: block;
+}
+
+@media screen and (max-device-width: 768px) {
+    .nav_panel {
+        display: none;
+    }
+}
+
+@media screen and (min-device-width: 768px) {
+    .mobile_menu {
+        display: none;
+    }
+}
+
 /*cabinet release block*/
 
 .release {
@@ -114,7 +130,7 @@
     display: flex;
     justify-content: space-evenly;
     margin: 50px;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 #d_release_status_default:hover {
@@ -150,7 +166,7 @@
     height: 260px;
     width: 260px;
     margin-right: 50px;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .release_date {
@@ -163,7 +179,7 @@
     font-size: 25px;
     color: rgba(31, 31, 31, 1);
     background-color: rgba(31, 31, 31, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -172,7 +188,7 @@
     font-size: 25px;
     color: rgba(54, 209, 54, 1);
     background-color: rgba(54, 209, 54, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -181,7 +197,7 @@
     font-size: 25px;
     color: rgba(212, 203, 44, 1);
     background-color: rgba(212, 203, 44, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -190,8 +206,72 @@
     font-size: 25px;
     color: rgba(222, 53, 53, 1);
     background-color: rgba(222, 53, 53, 0.2);
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
+}
+
+.cabinet_menu {
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+    text-align: center;
+}
+
+.cabinet_link {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    font-size: 30px;
+    color: black;
+}
+
+
+.cabinet_link:hover {
+    transition-duration: 0.5s;
+    color: coral;
+}
+
+/*settings page*/
+
+.settings_elements {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.s_element {
+    margin: 50px 25px 25px 25px;
+    width: 500px;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding-top: 100px;
+    border-radius: 50px;
+    border: 10px solid rgba(0, 0, 0, 0.08);
+}
+
+.s_element:hover {
+    transition-duration: 0.5s;
+    background-color: rgba(0, 0, 0, 0.10);
+}
+
+.s_element p {
+    max-width: 350px;
+    font-size: 30px;
+    margin-left: 50px;
+    color: rgba(0, 0, 0, 0.4);
+    margin-bottom: 100px;
+}
+.range_theme {
+    width: 300px;
+    margin-left: 100px;
+}
+
+#customRange3 {
+
+}
+#btn_save {
+    width: 130px;
+    margin-left: 140px;
 }
 
 /*release info and track list*/
@@ -200,7 +280,7 @@
     margin: 50px auto;
     width: 500px;
     min-height: 750px;
-    border-radius: 5px;
+    border-radius: 50px;
     background-color: white;
     box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
 }
@@ -219,7 +299,7 @@
 
 .t_release_date {
     padding-bottom: 30px;
-    color: rgba(0,0,0,0.4);
+    color: rgba(0, 0, 0, 0.4);
     font-size: 30px;
     text-align: center;
 }
@@ -228,7 +308,7 @@
     margin-left: 75px;
     height: 350px;
     width: 350px;
-    border-radius: 5px;
+    border-radius: 20px;
     margin-bottom: 50px;
 }
 
@@ -264,8 +344,8 @@
 
 .login_box {
     width: 500px;
-    margin: 0 auto 500px;
-    border-radius: 5px;
+    margin: 0 auto 25px;
+    border-radius: 20px;
     box-shadow: 0 0 10px rgba(255, 127, 80, 0.1);
 }
 
@@ -311,6 +391,36 @@ input[type=text] {
 
 input[type=password] {
     font-size: 20px;
+}
+
+.wrong {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(222, 53, 53, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.wrong p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(222, 53, 53, 1);
+}
+
+.warning {
+    display: none;
+    margin: 0 auto;
+    background-color: rgba(212, 203, 44, 0.2);
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.warning p {
+    text-align: center;
+    padding-top: 15px;
+    color: rgba(212, 203, 44, 1);
 }
 
 /*prices accordion*/
@@ -377,15 +487,6 @@ input[type=password] {
     color: coral;
 }
 
-.w_logo {
-    padding-top: 50px;
-}
-
-.footer_info img {
-    width: 150px;
-    height: 50px;
-}
-
 
 /*size const*/
 
@@ -405,6 +506,7 @@ p {
 
 .btn {
     font-size: 20px;
+    border-radius: 20px;
 }
 
 .btn-primary {
@@ -413,4 +515,12 @@ p {
 
 .btn-primary:hover {
     color: rgb(240, 240, 240);
+}
+
+.form-control {
+    border-radius: 20px;
+}
+
+.checkbox {
+    transform: scale(1.5);
 }

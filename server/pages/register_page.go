@@ -13,9 +13,24 @@ func init() {
 	// Register Page
 	initPages = append(initPages, func(p *Pages) Page {
 		var pg page
+		var wrong string
+		var warning string
 		pg.name = registerPage
 		pg.get = func(rw http.ResponseWriter, r *http.Request) {
 			userId := readSession(r)
+			var currentTheme string
+			var navLogo string
+			var colorTheme string
+			theme := readTheme(r)
+			if theme == "SGreen" {
+				currentTheme = "style_black.css"
+				navLogo = "logo_white.png"
+				colorTheme = "success"
+			} else {
+				currentTheme = "style.css"
+				navLogo = "logo.png"
+				colorTheme = "primary"
+			}
 			locales, err := p.loc.TranslatePage(r.Header.Get("Accept-Language"),
 				"reg_p", "reg_email", "login_user", "login_pass", "reg_complete", "reg_login",
 				"nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request", "nav_logout", "nav_login",
@@ -25,7 +40,14 @@ func init() {
 				"loggedIn": userId > 0,
 				"pages":    p.GetPagesInfo(),
 				"locales":  locales,
+				"wrong":    wrong,
+				"warning":  warning,
+				"theme":    currentTheme,
+				"nav_logo": navLogo,
+				"color":    colorTheme,
 			}
+			wrong = "display: none;"
+			warning = "display: none;"
 			if userId > 0 {
 				http.Redirect(rw, r, "../cabinet", http.StatusFound)
 			}
@@ -38,6 +60,16 @@ func init() {
 			email := r.FormValue("email")
 			username := r.FormValue("text")
 			password := r.FormValue("password")
+			if len(email) < 1 || len(username) < 1 || len(password) < 1 {
+				warning = "display: block;"
+				http.Redirect(rw, r, "/register/", http.StatusFound)
+				return
+			}
+			if len(password) < 8 {
+				wrong = "display: block;"
+				http.Redirect(rw, r, "/register/", http.StatusFound)
+				return
+			}
 			err := p.pgService.NewUser(email, username, password)
 			userId, err := p.pgService.GetUserId(username, password)
 			if err != nil || userId <= 0 {

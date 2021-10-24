@@ -14,6 +14,19 @@ func init() {
 		pg.name = requestPage
 		pg.get = func(rw http.ResponseWriter, r *http.Request) {
 			userId := readSession(r)
+			var currentTheme string
+			var navLogo string
+			var colorTheme string
+			theme := readTheme(r)
+			if theme == "SGreen" {
+				currentTheme = "style_black.css"
+				navLogo = "logo_white.png"
+				colorTheme = "success"
+			} else {
+				currentTheme = "style.css"
+				navLogo = "logo.png"
+				colorTheme = "primary"
+			}
 			locales, err := p.loc.TranslatePage(r.Header.Get("Accept-Language"),
 				"request_p", "request_release_name", "request_text", "request_send", "request_success",
 				"request_sent", "request_btn_success", "nav_main", "nav_prices", "nav_profile", "nav_cabinet",
@@ -24,6 +37,9 @@ func init() {
 				"loggedIn": userId > 0,
 				"pages":    p.GetPagesInfo(),
 				"locales":  locales,
+				"theme":    currentTheme,
+				"nav_logo": navLogo,
+				"color":    colorTheme,
 			}
 			if userId <= 0 {
 				http.Redirect(rw, r, "../login", http.StatusSeeOther)

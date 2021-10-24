@@ -1,11 +1,11 @@
 {{define "upload"}}
-    {{template "header"}}
+    {{template "header" .}}
     {{template "nav" .}}
     <body>
     <center>
         <p class="zg" style="padding-top: 100px">Добавление релиза</p>
         <label>
-            <img src="/resources/cover.png" style="height: 250px;">
+            <img src="/resources/img/cover.png" style="height: 250px;">
             <input type="file" hidden>
         </label><br><br>
         <div>
@@ -18,7 +18,7 @@
             <span class="fs-5">{{.perfs}}</span>
         </div>
         <br>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+        <button type="button" class="btn btn-{{print .color}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
             Добавить трек
         </button>
         <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -52,7 +52,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-{{print .color}}" data-bs-dismiss="modal" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop2">Далее
                             </button>
                         </div>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-{{print .color}}" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop2">Далее
                             </button>
                         </div>
