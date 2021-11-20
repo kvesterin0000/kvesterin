@@ -1,8 +1,11 @@
 package pages
 
 import (
+	"github.com/wasteimage/dist/server/db"
+	"github.com/wasteimage/dist/server/pages/locales"
 	"net/http"
 	"strconv"
+	"text/template"
 )
 
 type PageInfo struct {
@@ -19,8 +22,24 @@ type Page interface {
 
 type page struct {
 	name string
-	get  http.HandlerFunc
-	post http.HandlerFunc
+
+	db   db.Service
+	tmpl *template.Template
+	loc  *locales.Locales
+}
+
+func newPage(
+	name string,
+	pgService db.Service,
+	tmpl *template.Template,
+	loc *locales.Locales,
+) page {
+	return page{
+		name: name,
+		db:   pgService,
+		tmpl: tmpl,
+		loc:  loc,
+	}
 }
 
 func (p *page) Info() PageInfo {
@@ -28,17 +47,6 @@ func (p *page) Info() PageInfo {
 		Name:   p.name,
 		Path:   "/" + p.name + "/",
 		BackTo: "../" + p.name,
-	}
-}
-
-func (p *page) Get(rw http.ResponseWriter, r *http.Request) {
-	if p.get != nil {
-		p.get(rw, r)
-	}
-}
-func (p *page) Post(rw http.ResponseWriter, r *http.Request) {
-	if p.post != nil {
-		p.post(rw, r)
 	}
 }
 

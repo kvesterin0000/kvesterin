@@ -3,7 +3,9 @@ package main
 import (
 	"github.com/wasteimage/dist/server/db"
 	"github.com/wasteimage/dist/server/pages"
+	"github.com/wasteimage/dist/server/pages/locales"
 	"net/http"
+	"text/template"
 
 	_ "github.com/lib/pq"
 )
@@ -16,11 +18,18 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	pageHandler := pages.New(pgDB).GetHandler()
+
+	var tmpl = template.Must(template.ParseGlob("pages/*"))
+	loc, err := locales.New("languages/en.json", "languages/ru.json")
+	if err != nil {
+		panic(err)
+	}
+
+	pagesHandler := pages.New(pgDB, tmpl, loc).GetHandler()
 
 	server := http.Server{
 		Addr:    ":5565",
-		Handler: pageHandler,
+		Handler: pagesHandler,
 	}
 	err = server.ListenAndServe()
 	if err != nil {

@@ -5,19 +5,21 @@ import (
 	"net/http"
 )
 
-const notFoundPage = "notFound"
+const notFoundPageName = "notFound"
 
-func init() {
-	// notFound Page
-	initPages = append(initPages, func(p *Pages) Page {
-		var pg page
-		pg.name = notFoundPage
-		pg.get = func(rw http.ResponseWriter, r *http.Request) {
-			err := p.tmpl.Lookup("notFound").Execute(rw, nil)
-			if err != nil {
-				fmt.Println(err)
-			}
-		}
-		return &pg
-	})
+var _ Page = &notFoundPage{}
+
+type notFoundPage struct {
+	page
+}
+
+func (p *notFoundPage) Get(rw http.ResponseWriter, r *http.Request) {
+	err := p.tmpl.Lookup(notFoundPageName).Execute(rw, nil)
+	if err != nil {
+		fmt.Println(err)
+	}
+}
+
+func (p *notFoundPage) Post(rw http.ResponseWriter, r *http.Request) {
+	p.Get(rw, r)
 }
