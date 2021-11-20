@@ -17,9 +17,12 @@ func (p *cabinetPage) Get(rq RequestContext) {
 	var currentTheme string
 	var navLogo string
 	var colorTheme string
+	// FIXME: theme name must be iota constant and create method rq.Dark()bool for this check
 	if rq.theme == "SGreen" {
+		// FIXME: put all path-including variables to common config structure
 		currentTheme = "style_black.css"
 		navLogo = "logo_white.png"
+		// FIXME: field type (colorTheme) must string constants of defined type
 		colorTheme = "success"
 	} else {
 		currentTheme = "style.css"
@@ -41,8 +44,10 @@ func (p *cabinetPage) Get(rq RequestContext) {
 		fmt.Println("no releases")
 	}
 	var params = map[string]interface{}{
+		//FIXME: create method rq.LoggedIn()bool for this check
 		"loggedIn": rq.userID > 0,
 		"releases": releases,
+		//FIXME: some of this values are required for every page, let's unite them into structure
 		"pages":    AllPagesInfo(),
 		"locales":  locs,
 		"theme":    currentTheme,
@@ -51,6 +56,7 @@ func (p *cabinetPage) Get(rq RequestContext) {
 	}
 	err = p.tmpl.Lookup(cabinetPageName).Execute(rq.rw, params)
 	if err != nil {
+		//FIXME: if any unexpected error occurs - return notFoundPage or 5xx error status
 		fmt.Println(err)
 	}
 }

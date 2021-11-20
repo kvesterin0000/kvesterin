@@ -60,6 +60,7 @@ func (p *registerPage) Post(rq RequestContext) {
 	email := rq.r.FormValue("email")
 	username := rq.r.FormValue("text")
 	password := rq.r.FormValue("password")
+	// FIXME: use simpler check for strings - (email == "")
 	if len(email) < 1 || len(username) < 1 || len(password) < 1 {
 		p.warning = "display: block;"
 		http.Redirect(rq.rw, rq.r, "/register/", http.StatusFound)
@@ -73,6 +74,7 @@ func (p *registerPage) Post(rq RequestContext) {
 	err := p.db.NewUser(email, username, password)
 	userId, err := p.db.GetUserId(username, password)
 	if err != nil || userId <= 0 {
+		// FIXME: put register redirect to method
 		http.Redirect(rq.rw, rq.r, "/register/", http.StatusFound)
 	}
 	session := http.Cookie{
@@ -82,6 +84,7 @@ func (p *registerPage) Post(rq RequestContext) {
 		Domain:  "*",
 		Expires: time.Now().Add(time.Hour * 48),
 	}
+	// FIXME: you don't need to add this cookie to request (it's input object, changes won't apply anywhere)
 	rq.r.AddCookie(&session)
 	http.SetCookie(rq.rw, &session)
 	http.Redirect(rq.rw, rq.r, "../cabinet", http.StatusFound)

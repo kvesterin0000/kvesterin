@@ -31,7 +31,16 @@ func AllPagesInfo() map[string]PageInfo {
 type Pages struct{}
 
 func New(service db.Service, tmpl *template.Template, loc *locales.Locales) *Pages {
-	allPages[cabinetPageName] = &cabinetPage{newPage(cabinetPageName, service, tmpl, loc)}
+	allPages[cabinetPageName] = &cabinetPage{page: newPage(cabinetPageName, service, tmpl, loc)}
+	allPages[indexPageName] = &indexPage{page: newPage(indexPageName, service, tmpl, loc)}
+	allPages[loginPageName] = &loginPage{page: newPage(loginPageName, service, tmpl, loc)}
+	allPages[notFoundPageName] = &notFoundPage{page: newPage(notFoundPageName, service, tmpl, loc)}
+	allPages[pricesPageName] = &pricesPage{page: newPage(pricesPageName, service, tmpl, loc)}
+	allPages[registerPageName] = &registerPage{page: newPage(registerPageName, service, tmpl, loc)}
+	allPages[releasePageName] = &releasePage{page: newPage(releasePageName, service, tmpl, loc)}
+	allPages[requestPageName] = &requestPage{page: newPage(requestPageName, service, tmpl, loc)}
+	allPages[settingsPageName] = &settingsPage{page: newPage(settingsPageName, service, tmpl, loc)}
+	allPages[uploadPageName] = &uploadPage{page: newPage(uploadPageName, service, tmpl, loc)}
 	return &Pages{}
 }
 

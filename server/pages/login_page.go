@@ -36,6 +36,7 @@ func (p *loginPage) Get(rq RequestContext) {
 		navLogo = "logo.png"
 		colorTheme = "primary"
 	}
+	//FIXME: define list of required locales fields in loginPage structure
 	locales, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"),
 		"login_p", "login_user", "login_pass", "login_complete", "login_reg",
 		"nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request", "nav_logout", "nav_login",
@@ -51,7 +52,9 @@ func (p *loginPage) Get(rq RequestContext) {
 		"nav_logo": navLogo,
 		"color":    colorTheme,
 	}
+	//FIXME: create constant (style hidden) and rename wrongPass to wrongPassStyle
 	p.wrongPass = "display: none;"
+	//FIXME: rename to warning message style
 	p.warning = "display: none;"
 	if rq.userID > 0 {
 		http.Redirect(rq.rw, rq.r, "../cabinet", http.StatusFound)
@@ -66,6 +69,7 @@ func (p *loginPage) Post(rq RequestContext) {
 	username := rq.r.FormValue("text")
 	password := rq.r.FormValue("password")
 	if len(username) < 1 || len(password) < 1 {
+		//FIXME: create constant (style shown) and rename to warning message style
 		p.warning = "display: block;"
 		http.Redirect(rq.rw, rq.r, "/login/", http.StatusFound)
 	}
@@ -74,6 +78,7 @@ func (p *loginPage) Post(rq RequestContext) {
 		p.wrongPass = "display: block;"
 		http.Redirect(rq.rw, rq.r, "/login/", http.StatusFound)
 	}
+	// FIXME: create methods (set uid cookie) and (set theme cookie)
 	session := http.Cookie{
 		Name:    sessionCookie,
 		Value:   strconv.Itoa(userId),

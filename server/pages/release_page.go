@@ -19,6 +19,7 @@ func (p *releasePage) Get(rq RequestContext) {
 	releaseIdStr := strings.TrimPrefix(rq.r.RequestURI, "/release/")
 	releaseId, err := strconv.Atoi(releaseIdStr)
 	if err != nil {
+		// FIXME: put not found redirect into method (don't forget to check that page is not nil)
 		http.Redirect(rq.rw, rq.r, "../notFound", http.StatusSeeOther)
 	}
 	var currentTheme string

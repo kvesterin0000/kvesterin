@@ -25,6 +25,7 @@ func (p *requestPage) Get(rq RequestContext) {
 		colorTheme = "success"
 	} else {
 		currentTheme = "style.css"
+		// FIXME: theme related stuff must be in config
 		navLogo = "logo.png"
 		colorTheme = "primary"
 	}

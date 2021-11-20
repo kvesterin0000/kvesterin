@@ -90,6 +90,7 @@ func (p *settingsPage) Post(rq RequestContext) {
 			rq.r.AddCookie(&session)
 			http.SetCookie(rq.rw, &session)
 		} else {
+			// FIXME: make method for zero time cookie
 			trashCookie := http.Cookie{
 				Name:    themeCookie,
 				Path:    "/",
