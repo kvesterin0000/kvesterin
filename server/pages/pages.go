@@ -45,19 +45,26 @@ func (p *Pages) GetHandler() http.Handler {
 }
 
 func (p *Pages) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+	rq := ContextFromRWR(rw, r)
+
 	pageName := parsePageName(r.RequestURI)
 	pg := GetPage(pageName)
 	if pg == nil {
-		rw.WriteHeader(http.StatusNoContent)
+		pg = GetPage(notFoundPageName)
+		if pg != nil {
+			pg.Get(rq)
+		} else {
+			rw.WriteHeader(http.StatusNoContent)
+		}
 		return
 	}
 	switch r.Method {
 	case http.MethodGet:
-		pg.Get(rw, r)
+		pg.Get(rq)
 	case http.MethodPost:
-		pg.Post(rw, r)
+		pg.Post(rq)
 	default:
-		GetPage(notFoundPageName).Get(rw, r)
+		GetPage(notFoundPageName).Get(rq)
 	}
 }
 

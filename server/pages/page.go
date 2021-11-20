@@ -8,6 +8,25 @@ import (
 	"text/template"
 )
 
+type RequestContext struct {
+	rw     http.ResponseWriter
+	r      *http.Request
+	userID int
+	theme  string
+}
+
+func ContextFromRWR(rw http.ResponseWriter, r *http.Request) RequestContext {
+	userID := readSession(r)
+	theme := readTheme(r)
+
+	return RequestContext{
+		rw:     rw,
+		r:      r,
+		userID: userID,
+		theme:  theme,
+	}
+}
+
 type PageInfo struct {
 	Name   string
 	Path   string
@@ -16,8 +35,8 @@ type PageInfo struct {
 
 type Page interface {
 	Info() PageInfo
-	Get(rw http.ResponseWriter, r *http.Request)
-	Post(rw http.ResponseWriter, r *http.Request)
+	Get(rc RequestContext)
+	Post(rc RequestContext)
 }
 
 type page struct {

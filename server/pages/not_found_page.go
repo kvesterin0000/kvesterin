@@ -2,7 +2,6 @@ package pages
 
 import (
 	"fmt"
-	"net/http"
 )
 
 const notFoundPageName = "notFound"
@@ -13,13 +12,13 @@ type notFoundPage struct {
 	page
 }
 
-func (p *notFoundPage) Get(rw http.ResponseWriter, r *http.Request) {
-	err := p.tmpl.Lookup(notFoundPageName).Execute(rw, nil)
+func (p *notFoundPage) Get(rq RequestContext) {
+	err := p.tmpl.Lookup(notFoundPageName).Execute(rq.rw, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
 
-func (p *notFoundPage) Post(rw http.ResponseWriter, r *http.Request) {
-	p.Get(rw, r)
+func (p *notFoundPage) Post(rq RequestContext) {
+	p.Get(rq)
 }

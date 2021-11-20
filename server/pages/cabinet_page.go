@@ -13,13 +13,11 @@ type cabinetPage struct {
 	page
 }
 
-func (p *cabinetPage) Get(rw http.ResponseWriter, r *http.Request) {
-	userId := readSession(r)
+func (p *cabinetPage) Get(rq RequestContext) {
 	var currentTheme string
 	var navLogo string
 	var colorTheme string
-	theme := readTheme(r)
-	if theme == "SGreen" {
+	if rq.theme == "SGreen" {
 		currentTheme = "style_black.css"
 		navLogo = "logo_white.png"
 		colorTheme = "success"
@@ -28,22 +26,22 @@ func (p *cabinetPage) Get(rw http.ResponseWriter, r *http.Request) {
 		navLogo = "logo.png"
 		colorTheme = "primary"
 	}
-	locs, err := p.loc.TranslatePage(r.Header.Get("Accept-Language"),
+	locs, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"),
 		"cabinet_p", "cabinet_settings", "cabinet_more", "cabinet_upload", "cabinet_no_releases",
 		"status_success", "status_pending", "status_default", "status_canceled", "nav_main", "nav_prices",
 		"nav_profile", "nav_cabinet", "nav_request", "nav_logout", "nav_login", "footer_info", "footer_vk",
 		"footer_yt", "footer_dev", "footer_more", "footer_dist",
 	)
-	if userId <= 0 {
-		http.Redirect(rw, r, "../login", http.StatusSeeOther)
+	if rq.userID <= 0 {
+		http.Redirect(rq.rw, rq.r, "../login", http.StatusSeeOther)
 	}
 
-	releases, err := p.db.GetReleaseByUserId(userId)
+	releases, err := p.db.GetReleaseByUserId(rq.userID)
 	if err != nil {
 		fmt.Println("no releases")
 	}
 	var params = map[string]interface{}{
-		"loggedIn": userId > 0,
+		"loggedIn": rq.userID > 0,
 		"releases": releases,
 		"pages":    AllPagesInfo(),
 		"locales":  locs,
@@ -51,12 +49,12 @@ func (p *cabinetPage) Get(rw http.ResponseWriter, r *http.Request) {
 		"nav_logo": navLogo,
 		"color":    colorTheme,
 	}
-	err = p.tmpl.Lookup(cabinetPageName).Execute(rw, params)
+	err = p.tmpl.Lookup(cabinetPageName).Execute(rq.rw, params)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
 
-func (p *cabinetPage) Post(rw http.ResponseWriter, r *http.Request) {
-	GetPage(notFoundPageName).Get(rw, r)
+func (p *cabinetPage) Post(rq RequestContext) {
+	GetPage(notFoundPageName).Get(rq)
 }

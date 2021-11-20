@@ -14,14 +14,12 @@ type settingsPage struct {
 	page
 }
 
-func (p *settingsPage) Get(rw http.ResponseWriter, r *http.Request) {
-	userId := readSession(r)
+func (p *settingsPage) Get(rq RequestContext) {
 	var currentTheme string
 	var navLogo string
 	var colorTheme string
 	var val string
-	theme := readTheme(r)
-	if theme == "SGreen" {
+	if rq.theme == "SGreen" {
 		currentTheme = "style_black.css"
 		navLogo = "logo_white.png"
 		colorTheme = "success"
@@ -32,15 +30,15 @@ func (p *settingsPage) Get(rw http.ResponseWriter, r *http.Request) {
 		colorTheme = "primary"
 		val = ""
 	}
-	if userId <= 0 {
-		http.Redirect(rw, r, "../login", http.StatusSeeOther)
+	if rq.userID <= 0 {
+		http.Redirect(rq.rw, rq.r, "../login", http.StatusSeeOther)
 	}
-	user, err := p.db.GetUser(userId)
+	user, err := p.db.GetUser(rq.userID)
 	if err != nil {
 		fmt.Println(err)
 	}
 	email := user.Email
-	locales, err := p.loc.TranslatePage(r.Header.Get("Accept-Language"), "cabinet_p",
+	locales, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"), "cabinet_p",
 		"cabinet_settings", "settings_change_pass", "settings_old_pass", "settings_new_pass",
 		"settings_new_pass2", "settings_btn_change", "settings_email_conf", "settings_email",
 		"settings_btn_submit", "nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request",
@@ -48,11 +46,11 @@ func (p *settingsPage) Get(rw http.ResponseWriter, r *http.Request) {
 		"footer_dist",
 	)
 	if err != nil {
-		GetPage(notFoundPageName).Get(rw, r)
+		GetPage(notFoundPageName).Get(rq)
 		return
 	}
 	var params = map[string]interface{}{
-		"loggedIn": userId > 0,
+		"loggedIn": rq.userID > 0,
 		"pages":    AllPagesInfo(),
 		"locales":  locales,
 		"email":    email,
@@ -61,28 +59,27 @@ func (p *settingsPage) Get(rw http.ResponseWriter, r *http.Request) {
 		"color":    colorTheme,
 		"val":      val,
 	}
-	err = p.tmpl.Lookup(settingsPageName).Execute(rw, params)
+	err = p.tmpl.Lookup(settingsPageName).Execute(rq.rw, params)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
 
-func (p *settingsPage) Post(rw http.ResponseWriter, r *http.Request) {
-	userId := readSession(r)
-	switch r.FormValue("form_name") {
+func (p *settingsPage) Post(rq RequestContext) {
+	switch rq.r.FormValue("form_name") {
 	case "change_password":
-		oldPass := r.FormValue("password")
-		newPass1 := r.FormValue("password_new1")
-		newPass2 := r.FormValue("password_new2")
+		oldPass := rq.r.FormValue("password")
+		newPass1 := rq.r.FormValue("password_new1")
+		newPass2 := rq.r.FormValue("password_new2")
 		if newPass1 == newPass2 {
-			err := p.db.UpdatePassword(userId, oldPass, newPass2)
+			err := p.db.UpdatePassword(rq.userID, oldPass, newPass2)
 			if err != nil {
 				fmt.Println(err)
 			}
 		}
 	case "email_confirmation":
 	case "change_theme":
-		if r.FormValue("theme") == "on" {
+		if rq.r.FormValue("theme") == "on" {
 			session := http.Cookie{
 				Name:    themeCookie,
 				Value:   "SGreen",
@@ -90,17 +87,17 @@ func (p *settingsPage) Post(rw http.ResponseWriter, r *http.Request) {
 				Domain:  "",
 				Expires: time.Now().Add(time.Hour * 730),
 			}
-			r.AddCookie(&session)
-			http.SetCookie(rw, &session)
+			rq.r.AddCookie(&session)
+			http.SetCookie(rq.rw, &session)
 		} else {
 			trashCookie := http.Cookie{
 				Name:    themeCookie,
 				Path:    "/",
 				Expires: time.Now(),
 			}
-			http.SetCookie(rw, &trashCookie)
+			http.SetCookie(rq.rw, &trashCookie)
 		}
 	}
-	fmt.Println(r.FormValue("theme"))
-	http.Redirect(rw, r, "../settings/", http.StatusFound)
+	fmt.Println(rq.r.FormValue("theme"))
+	http.Redirect(rq.rw, rq.r, "../settings/", http.StatusFound)
 }

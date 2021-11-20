@@ -15,13 +15,11 @@ type requestPage struct {
 	page
 }
 
-func (p *requestPage) Get(rw http.ResponseWriter, r *http.Request) {
-	userId := readSession(r)
+func (p *requestPage) Get(rq RequestContext) {
 	var currentTheme string
 	var navLogo string
 	var colorTheme string
-	theme := readTheme(r)
-	if theme == "SGreen" {
+	if rq.theme == "SGreen" {
 		currentTheme = "style_black.css"
 		navLogo = "logo_white.png"
 		colorTheme = "success"
@@ -30,14 +28,14 @@ func (p *requestPage) Get(rw http.ResponseWriter, r *http.Request) {
 		navLogo = "logo.png"
 		colorTheme = "primary"
 	}
-	locales, err := p.loc.TranslatePage(r.Header.Get("Accept-Language"),
+	locales, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"),
 		"request_p", "request_release_name", "request_text", "request_send", "request_success",
 		"request_sent", "request_btn_success", "nav_main", "nav_prices", "nav_profile", "nav_cabinet",
 		"nav_request", "nav_logout", "nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev",
 		"footer_more", "footer_dist",
 	)
 	var params = map[string]interface{}{
-		"loggedIn": userId > 0,
+		"loggedIn": rq.userID > 0,
 		"pages":    AllPagesInfo(),
 		"locales":  locales,
 		"theme":    currentTheme,
@@ -48,24 +46,24 @@ func (p *requestPage) Get(rw http.ResponseWriter, r *http.Request) {
 	}
 	p.sent = "display: none;"
 	p.warning = "display: none;"
-	if userId <= 0 {
-		http.Redirect(rw, r, "../login", http.StatusSeeOther)
+	if rq.userID <= 0 {
+		http.Redirect(rq.rw, rq.r, "../login", http.StatusSeeOther)
 	}
-	err = p.tmpl.Lookup("request").Execute(rw, params)
+	err = p.tmpl.Lookup("request").Execute(rq.rw, params)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
 
-func (p *requestPage) Post(rw http.ResponseWriter, r *http.Request) {
-	release := r.FormValue("release")
-	request := r.FormValue("request")
+func (p *requestPage) Post(rq RequestContext) {
+	release := rq.r.FormValue("release")
+	request := rq.r.FormValue("request")
 	if len(release) < 1 || len(request) < 1 {
 		p.warning = "display: block;"
-		http.Redirect(rw, r, "/request/", http.StatusFound)
+		http.Redirect(rq.rw, rq.r, "/request/", http.StatusFound)
 	} else {
 		p.sent = "display: block;"
-		http.Redirect(rw, r, "/request/", http.StatusFound)
+		http.Redirect(rq.rw, rq.r, "/request/", http.StatusFound)
 	}
 	return
 }
