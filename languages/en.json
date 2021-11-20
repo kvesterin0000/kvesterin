@@ -29,7 +29,7 @@
     "desc": "Our service presents high quality music distribution"
   },
   {
-    "start": "How to start?"
+    "start": "Start"
   },
 
 
@@ -148,7 +148,13 @@
     "settings_email": "EMail"
   },
   {
+    "settings_web": "Web-site settings"
+  },
+  {
     "settings_btn_submit": "Submit"
+  },
+  {
+    "settings_btn_save": "Save"
   },
 
 

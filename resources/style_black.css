@@ -126,6 +126,75 @@ body {
     }
 }
 
+/*index page*/
+.index_logo {
+    width: 150px;
+}
+
+.index_logo_box {
+    width: 150px;
+    margin: 0 auto;
+    padding-top: 300px;
+}
+
+.index_text {
+    text-align: center;
+}
+
+.welcome_t1 {
+    text-align: center;
+    font-size: 30px;
+    color: rgba(74, 199, 82, 0.6);
+    transition-duration: 0.4s;
+}
+
+.welcome_t1:hover {
+    font-size: 40px;
+    transition-duration: 0.4s;
+    color: rgba(74, 199, 82, 0.8);
+}
+
+.welcome_t2 {
+    text-align: center;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.6);
+    transition-duration: 0.4s;
+}
+
+.welcome_t2:hover {
+    font-size: 40px;
+    transition-duration: 0.4s;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.welcome_t3 {
+    text-align: center;
+    font-size: 30px;
+    color: rgba(74, 199, 82, 0.4);
+    transition-duration: 0.4s;
+}
+
+.welcome_t3:hover {
+    font-size: 40px;
+    transition-duration: 0.4s;
+    color: rgba(74, 199, 82, 0.6);
+}
+
+.welcome_box {
+    width: 70%;
+    margin: 0 15%;
+    height: 300px;
+}
+
+.index_btn{
+    margin-top: 25px;
+    width: 300px;
+}
+
+.index_btn_box {
+    width: 300px;
+    margin: 0 auto;
+}
 /*cabinet release block*/
 
 .release {
@@ -387,7 +456,7 @@ body {
 
 .cover {
     height: 300px;
-    margin-left: 300px;
+    margin-left: 80px;
     border-radius: 30px;
 }
 
@@ -416,6 +485,11 @@ body {
     width: 600px;
     margin-left: 150px;
     padding-bottom: 25px;
+}
+
+#btn_add_track {
+    width: 160px;
+    margin-left: 220px;
 }
 
 /*login and register boxes*/
@@ -468,22 +542,35 @@ input[type=email] {
     font-size: 20px;
 }
 
-input[type=email]:focus {
-    box-shadow: none;
-}
 
 input[type=text] {
     font-size: 20px;
 }
 
-input[type=text]:focus {
-    box-shadow: none;
-}
 
 input[type=password] {
     font-size: 20px;
 }
 /*prices accordion*/
+.accordion_box {
+    width: 600px;
+    height: 1300px;
+    margin: 0 auto;
+}
+
+.p_price {
+    text-align: center;
+}
+
+.btn_go {
+    width: 50px;
+}
+
+.btn_go_box {
+    width: 50px;
+    margin-left: 275px;
+    margin-top: 300px;
+}
 
 .accordion {
     margin: 0 auto;
@@ -593,6 +680,11 @@ span {
     font-size: 30px;
 }
 
+.second_text {
+    color: rgba(255,255,255,0.4);
+    font-size: 20px;
+}
+
 /*buttons*/
 
 .btn {
@@ -610,6 +702,13 @@ span {
 
 .form-control {
     border-radius: 20px;
+    color: white;
+    border: none;
+    background-color: rgba(255,255,255,0.05);
+}
+.form-control:focus {
+    color: white;
+    background-color: rgba(255,255,255,0.05);
 }
 
 input[type=checkbox] {

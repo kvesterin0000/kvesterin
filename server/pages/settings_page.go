@@ -40,10 +40,10 @@ func (p *settingsPage) Get(rq RequestContext) {
 	email := user.Email
 	locales, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"), "cabinet_p",
 		"cabinet_settings", "settings_change_pass", "settings_old_pass", "settings_new_pass",
-		"settings_new_pass2", "settings_btn_change", "settings_email_conf", "settings_email",
-		"settings_btn_submit", "nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request",
-		"nav_logout", "nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more",
-		"footer_dist",
+		"settings_new_pass2", "settings_btn_change", "settings_email_conf", "settings_email", "settings_web",
+		"settings_btn_submit", "settings_btn_save", "nav_main", "nav_prices", "nav_profile", "nav_cabinet",
+		"nav_request", "nav_logout", "nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev",
+		"footer_more", "footer_dist",
 	)
 	if err != nil {
 		GetPage(notFoundPageName).Get(rq)

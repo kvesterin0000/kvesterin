@@ -65,6 +65,11 @@ func (p *uploadPage) Post(rq RequestContext) {
 	var perfs string
 	perfs = strings.Join(rq.r.Form["perf"], ", ")
 	releaseName := rq.r.FormValue("releaseName")
+	cover := rq.r.FormValue("cover")
+	err = p.db.NewRelease(rq.userId, cover, releaseName, perfs, "В исполнении")
+	if err != nil {
+		fmt.Println(err)
+	}
 	var params = map[string]interface{}{
 		"loggedIn":    rq.userID > 0,
 		"pages":       AllPagesInfo(),

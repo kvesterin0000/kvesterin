@@ -17,6 +17,7 @@ func (p *cabinetPage) Get(rq RequestContext) {
 	var currentTheme string
 	var navLogo string
 	var colorTheme string
+	var cover string
 	// FIXME: theme name must be iota constant and create method rq.Dark()bool for this check
 	if rq.theme == "SGreen" {
 		// FIXME: put all path-including variables to common config structure
@@ -24,10 +25,12 @@ func (p *cabinetPage) Get(rq RequestContext) {
 		navLogo = "logo_white.png"
 		// FIXME: field type (colorTheme) must string constants of defined type
 		colorTheme = "success"
+		cover = "cover_black.png"
 	} else {
 		currentTheme = "style.css"
 		navLogo = "logo.png"
 		colorTheme = "primary"
+		cover = "cover.png"
 	}
 	locs, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"),
 		"cabinet_p", "cabinet_settings", "cabinet_more", "cabinet_upload", "cabinet_no_releases",
@@ -53,6 +56,7 @@ func (p *cabinetPage) Get(rq RequestContext) {
 		"theme":    currentTheme,
 		"nav_logo": navLogo,
 		"color":    colorTheme,
+		"cover":    cover,
 	}
 	err = p.tmpl.Lookup(cabinetPageName).Execute(rq.rw, params)
 	if err != nil {

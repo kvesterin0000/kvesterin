@@ -4,24 +4,25 @@
     <body>
     <p class="zg" style="padding-top: 150px; text-align: center;">Добавление релиза</p>
     <div class="upload_box">
-        <label>
-            <img src="/resources/img/{{print .cover}}" class="cover">
-            <input type="file" accept="image/jpeg" hidden>
-        </label><br><br>
-        <div class="upload_name_box">
-            <p class="upload_rel_name">{{.releaseName}}</p>
-        </div>
-        <br>
-        <div>
-            <p class="upload_rel_perfs">{{.perfs}}</p>
-        </div>
-        <br>
-        <div class="track_box">
-            <button type="button" class="btn btn-{{print .color}}" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop1">
-                Добавить трек
-            </button>
-        </div>
+        <form method="post">
+            <input name="form_name" type="hidden" value="cover_upload">
+            <label>
+                <img src="/resources/img/{{print .cover}}" class="cover" id="blah">
+                <input type="file" accept="image/jpeg" hidden onchange="readURL(this);" name="cover">
+            </label><br><br>
+            <div class="upload_name_box">
+                <p class="upload_rel_name">{{.releaseName}}</p>
+            </div>
+            <br>
+            <div>
+                <p class="upload_rel_perfs">{{.perfs}}</p>
+            </div>
+            <br>
+            <div class="track_box">
+                <input type="submit" value="Добавить трек" class="btn btn-{{print .color}}" data-bs-toggle="modal"
+                       data-bs-target="#staticBackdrop1" id="btn_add_track">
+            </div>
+        </form>
         <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -30,7 +31,7 @@
                         <h5 class="modal-title" id="staticBackdropLabel">Добавление трека</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form>
+                    <form method="post">
                         <div class="modal-body">
                             <input class="form-control" type="text" placeholder="Исполнитель"
                                    aria-label="default input example" style="margin-bottom: 25px;">
@@ -41,7 +42,7 @@
                             <div class="mb-3">
                                 <label for="formFile" class="form-label" style="">Добавьте wav-файл</label>
                                 <input class="form-control" type="file" id="formFile" accept="audio/vnd.3gpp.iufp">
-                                <p class="text-muted">Файл должен быть в формате .wav 44100ghz 16bit stereo.</p>
+                                <p class="second_text">Файл должен быть в формате .wav 44100ghz 16bit stereo.</p>
                             </div>
                             <input class="form-control" type="text" placeholder="ФИО Исполнителя (исполнителей)"
                                    aria-label="default input example" style="margin-bottom: 25px;">
@@ -53,48 +54,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-{{print .color}}" data-bs-dismiss="modal"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop2">Далее
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Добавление релиза</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form>
-                        <div class="modal-body">
-                            <div class="d-flex justify-content-start">
-                                <p style="margin-right: 25px;">Исполнитель:</p>
-                                <p>Тест</p>
-                            </div>
-                            <div class="d-flex justify-content-start" style="margin-bottom: 25px;">
-                                <p style="margin-right: 25px;">Релиз:</p>
-                                <p>Тест</p>
-                            </div>
-                            <div>
-                                <p>Трек-лист:</p>
-                                <p>----</p>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Подтверждаю корректность
-                                    введенных данных</label>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-{{print .color}}" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop2">Далее
-                            </button>
+                            <input type="submit" value="Готово" class="btn btn-{{print .color}}" data-bs-dismiss="modal"
+                                   data-bs-toggle="modal">
                         </div>
                     </form>
                 </div>

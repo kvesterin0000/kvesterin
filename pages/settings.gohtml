@@ -46,7 +46,7 @@
         <div class="s_element">
             <form method="post" action="/settings/">
                 <input name="form_name" type="hidden" value="change_theme">
-                <p>Цветовая схема</p>
+                <p>{{print .locales.settings_web}}</p>
                 <div class="range_theme">
                     <br>
                     <div class="form-check form-switch" id="dark_box">
@@ -54,9 +54,14 @@
                         <input type="checkbox" class="form-check-input"  id="flexSwitchCheckDefault" name="theme"
                                {{print .val}}>
                     </div>
+                    <div class="form-check form-switch" id="dark_box">
+                        <span class="settings_dark">English</span>
+                        <input type="checkbox" class="form-check-input"  id="flexSwitchCheckDefault">
+                    </div>
                 </div>
                 <div class="btn_box">
-                    <input type="submit" value="Сохранить" class="btn btn-{{print .color}}" id="btn_save">
+                    <input type="submit" value="{{print .locales.settings_btn_save}}"
+                           class="btn btn-{{print .color}}" id="btn_save">
                 </div>
             </form>
         </div>

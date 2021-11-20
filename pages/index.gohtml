@@ -2,20 +2,27 @@
     {{template "header" .}}
     {{template "nav" .}}
     <body>
-    <center>
-        <div style="padding-top: 300px;">
-            <img src="/resources/img/{{print .nav_logo}}" style="height: 150px;">
-        </div>
-        <p class="zg" style="padding-top: 200px">{{print .locales.title}}</p>
-        <p class="text-secondary">{{print .locales.desc}}</p>
-        <div class="d-flex justify-content-evenly" style="padding-top: 200px;">
-            <img src="/resources/img/spotify.png" style="height: 100px;">
-            <img src="/resources/img/apple.png" style="height: 100px;">
-            <img src="/resources/img/vk.png" style="height: 100px;">
-            <img src="/resources/img/boom.png" style="height: 100px;">
-        </div>
-        <p class="zg" style="padding-top: 300px">{{print .locales.start}}</p>
-    </center>
+    <div class="index_logo_box">
+        <img src="/resources/img/{{print .nav_logo}}" class="index_logo">
+    </div>
+    <p class="zg index_text" style="padding-top: 200px">{{print .locales.title}}</p>
+    <p class="text-secondary index_text">{{print .locales.desc}}</p>
+    <div class="d-flex justify-content-evenly logo_box" style="padding-top: 200px;">
+        <img src="/resources/img/spotify.png" style="height: 100px;">
+        <img src="/resources/img/apple.png" style="height: 100px;">
+        <img src="/resources/img/vk.png" style="height: 100px;">
+        <img src="/resources/img/boom.png" style="height: 100px;">
+    </div>
+    <p class="index_text" style="padding-top: 300px; font-size: 50px">{{print .locales.start}}</p>
+    <div class="welcome_box">
+        <p class="welcome_t1" style="padding-top: 25px;">Теперь все релизы в одном месте</p>
+        <p class="welcome_t2" style="padding-top: 25px;">Просматривайте существующие и загружайте новые</p>
+        <p class="welcome_t3" style="padding-top: 25px;">Создавайте запросы в поддержку прямо на сайте</p>
+    </div>
+    <div class="index_btn_box">
+        <input type="button" onclick="window.location.href = '../register/';"
+               value="Получить все возможности" class="btn btn-{{print .color}} index_btn">
+    </div>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>
     {{template "footer" .}}

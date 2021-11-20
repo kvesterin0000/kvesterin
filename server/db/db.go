@@ -21,14 +21,16 @@ const (
 )
 
 type Service interface {
-	NewUser(string, string, string) error
+	NewUser(email, username, password string) error
 	// FIXME: maybe rename to Login()
-	GetUserId(string, string) (int, error)
-	GetUser(int) (*User, error)
+	GetUserId(username, password string) (int, error)
+	GetUser(id int) (*User, error)
 	GetReleaseByUserId(int) ([]*Release, error)
 	GetReleaseById(int) (*Release, error)
 	GetTrackByReleaseId(int) ([]*Track, error)
-	UpdatePassword(int, string, string) error
+	UpdatePassword(id int, password, newPassword string) error
+	NewRelease(userId int, cover, name, authors, status string) error
+	GetReleaseId(name, authors string) (int, error)
 }
 
 type service struct {
@@ -125,17 +127,17 @@ func (s *service) UpdatePassword(id int, password, newPassword string) error {
 	return nil
 }
 
-func (s *service) NewRelease(userId int, name, authors, status string) error {
+func (s *service) NewRelease(userId int, cover, name, authors, status string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
 	defer cancel()
-	query := fmt.Sprintf("insert into releases (user_id, name, authors, status) values ('%d', '%s', '%s', '%s')",
-		userId, name, authors, status)
+	query := fmt.Sprintf(
+		"insert into releases (user_id, cover, name, authors, status) values ('%d', '%s', '%s', '%s', '%s')",
+		userId, cover, name, authors, status)
 	fmt.Println(query)
 	_, err := s.db.ExecContext(ctx, query)
 	if err != nil {
 		return fmt.Errorf("error release insert: %w", err)
 	}
-
 	return nil
 }
 
