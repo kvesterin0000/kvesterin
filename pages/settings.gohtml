@@ -25,7 +25,7 @@
                 </div>
                 <div class="btn_box">
                     <input type="submit" value="{{print .locales.settings_btn_change}}"
-                           class="btn btn-{{print .color}}">
+                           class="btn btn-{{print .themeOpts.BtnColor}}">
                 </div>
             </form>
         </div>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="btn_box">
                     <input type="submit" value="{{print .locales.settings_btn_submit}}"
-                           class="btn btn-{{print .color}}">
+                           class="btn btn-{{print .themeOpts.BtnColor}}">
                 </div>
             </form>
         </div>
@@ -52,7 +52,7 @@
                     <div class="form-check form-switch" id="dark_box">
                         <span class="settings_dark">Dark Theme</span>
                         <input type="checkbox" class="form-check-input"  id="flexSwitchCheckDefault" name="theme"
-                               {{print .val}}>
+                                {{print .themeOpts.CheckboxValue}}>
                     </div>
                     <div class="form-check form-switch" id="dark_box">
                         <span class="settings_dark">English</span>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="btn_box">
                     <input type="submit" value="{{print .locales.settings_btn_save}}"
-                           class="btn btn-{{print .color}}" id="btn_save">
+                           class="btn btn-{{print .themeOpts.BtnColor}}" id="btn_save">
                 </div>
             </form>
         </div>

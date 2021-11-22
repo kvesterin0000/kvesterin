@@ -3,7 +3,7 @@
     {{template "nav" .}}
     <body>
     <div class="index_logo_box">
-        <img src="/resources/img/{{print .nav_logo}}" class="index_logo">
+        <img src="/resources/img/{{print .themeOpts.Logo}}" class="index_logo">
     </div>
     <p class="zg index_text" style="padding-top: 200px">{{print .locales.title}}</p>
     <p class="text-secondary index_text">{{print .locales.desc}}</p>
@@ -21,7 +21,7 @@
     </div>
     <div class="index_btn_box">
         <input type="button" onclick="window.location.href = '../register/';"
-               value="Получить все возможности" class="btn btn-{{print .color}} index_btn">
+               value="Получить все возможности" class="btn btn-{{print .themeOpts.BtnColor}} index_btn">
     </div>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
     </body>

@@ -7,7 +7,7 @@
         <form method="post">
             <input name="form_name" type="hidden" value="cover_upload">
             <label>
-                <img src="/resources/img/{{print .cover}}" class="cover" id="blah">
+                <img src="/resources/img/{{print .themeOpts.Cover}}" class="cover" id="blah">
                 <input type="file" accept="image/jpeg" hidden onchange="readURL(this);" name="cover">
             </label><br><br>
             <div class="upload_name_box">
@@ -19,7 +19,7 @@
             </div>
             <br>
             <div class="track_box">
-                <input type="submit" value="Добавить трек" class="btn btn-{{print .color}}" data-bs-toggle="modal"
+                <input type="submit" value="Добавить трек" class="btn btn-{{print .themeOpts.BtnColor}}" data-bs-toggle="modal"
                        data-bs-target="#staticBackdrop1" id="btn_add_track">
             </div>
         </form>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <input type="submit" value="Готово" class="btn btn-{{print .color}}" data-bs-dismiss="modal"
+                            <input type="submit" value="Готово" class="btn btn-{{print .themeOpts.BtnColor}}" data-bs-dismiss="modal"
                                    data-bs-toggle="modal">
                         </div>
                     </form>

@@ -6,25 +6,78 @@ import (
 	"net/http"
 	"strconv"
 	"text/template"
+	"time"
+)
+
+type Theme uint
+
+const (
+	ThemeWhite Theme = iota
+	ThemeBlack
 )
 
 type RequestContext struct {
-	rw     http.ResponseWriter
-	r      *http.Request
-	userID int
-	theme  string
+	rw        http.ResponseWriter
+	r         *http.Request
+	userID    int
+	theme     Theme
+	themeOpts ThemeOpts
 }
 
 func ContextFromRWR(rw http.ResponseWriter, r *http.Request) RequestContext {
 	userID := readSession(r)
 	theme := readTheme(r)
 
-	return RequestContext{
+	rc := RequestContext{
 		rw:     rw,
 		r:      r,
 		userID: userID,
 		theme:  theme,
 	}
+	// FIXME: put all path-including variables to common config structure
+	if rc.IsDark() {
+		rc.themeOpts = ThemeOpts{
+			"style_black.css",
+			"logo_white.png",
+			"cover_black.png",
+			"strelka_white.png",
+			"checked",
+			ColorSuccess,
+		}
+	} else {
+		rc.themeOpts = ThemeOpts{
+			"style.css",
+			"logo.png",
+			"cover.png",
+			"strelka.png",
+			"",
+			ColorPrimary,
+		}
+	}
+	return rc
+}
+
+func (rc *RequestContext) IsDark() bool {
+	return rc.theme == ThemeBlack
+}
+
+func (rc *RequestContext) IsLoggedIn() bool {
+	return rc.userID > 0
+}
+
+func (rc *RequestContext) Redirect(name string) {
+	http.Redirect(rc.rw, rc.r, GetPage(name).Info().BackTo, http.StatusFound)
+}
+
+func (rc *RequestContext) SetCookie(name, value string, duration time.Duration) {
+	cookie := http.Cookie{
+		Name:    name,
+		Value:   value,
+		Path:    "/",
+		Domain:  "",
+		Expires: time.Now().Add(duration),
+	}
+	http.SetCookie(rc.rw, &cookie)
 }
 
 type PageInfo struct {
@@ -69,12 +122,13 @@ func (p *page) Info() PageInfo {
 	}
 }
 
-func readTheme(r *http.Request) string {
-	session, err := r.Cookie(themeCookie)
+func readTheme(r *http.Request) Theme {
+	themeStr, err := r.Cookie(themeCookie)
 	if err != nil {
-		return ""
+		return 0
 	}
-	return session.Value
+	theme, _ := strconv.Atoi(themeStr.Value)
+	return Theme(theme)
 }
 
 func readSession(r *http.Request) int {

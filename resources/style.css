@@ -426,12 +426,12 @@
 
 .cover {
     height: 300px;
-    margin-left: 300px;
+    margin-left: 80px;
     border-radius: 30px;
 }
 
 .cover:hover {
-    background-color: rgba(0,0,0,0.01);
+    background-color: rgba(0,0,0,0.02);
     cursor: pointer;
 }
 

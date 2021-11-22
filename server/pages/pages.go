@@ -11,15 +11,21 @@ import (
 
 const (
 	sessionCookie = "sessionId"
-	themeCookie   = "SpecGreen"
+	themeCookie   = "theme"
 )
 
 var allPages map[string]Page
 
 func GetPage(name string) Page {
-	return allPages[name]
+	pg, ok := allPages[name]
+	if !ok {
+		pg, ok = allPages[notFoundPageName]
+		if !ok {
+			return nil
+		}
+	}
+	return pg
 }
-
 func AllPagesInfo() map[string]PageInfo {
 	var pagesInfo = make(map[string]PageInfo)
 	for _, page := range allPages {
@@ -31,6 +37,7 @@ func AllPagesInfo() map[string]PageInfo {
 type Pages struct{}
 
 func New(service db.Service, tmpl *template.Template, loc *locales.Locales) *Pages {
+	allPages = make(map[string]Page)
 	allPages[cabinetPageName] = &cabinetPage{page: newPage(cabinetPageName, service, tmpl, loc)}
 	allPages[indexPageName] = &indexPage{page: newPage(indexPageName, service, tmpl, loc)}
 	allPages[loginPageName] = &loginPage{page: newPage(loginPageName, service, tmpl, loc)}
@@ -59,12 +66,7 @@ func (p *Pages) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	pageName := parsePageName(r.RequestURI)
 	pg := GetPage(pageName)
 	if pg == nil {
-		pg = GetPage(notFoundPageName)
-		if pg != nil {
-			pg.Get(rq)
-		} else {
-			rw.WriteHeader(http.StatusNoContent)
-		}
+		rw.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	switch r.Method {

@@ -17,65 +17,50 @@ type registerPage struct {
 	page
 }
 
-func (p *registerPage) Get(rq RequestContext) {
-	var currentTheme string
-	var navLogo string
-	var colorTheme string
-	if rq.theme == "SGreen" {
-		currentTheme = "style_black.css"
-		navLogo = "logo_white.png"
-		colorTheme = "success"
-	} else {
-		currentTheme = "style.css"
-		navLogo = "logo.png"
-		colorTheme = "primary"
-	}
-	locales, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"),
+func (p *registerPage) Get(rc RequestContext) {
+	pgLocs := []string{
 		"reg_p", "reg_email", "login_user", "login_pass", "reg_complete", "reg_login",
 		"nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request", "nav_logout", "nav_login",
 		"footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more", "footer_dist",
-	)
+	}
+	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
 	var params = map[string]interface{}{
-		"loggedIn": rq.userID > 0,
-		"pages":    AllPagesInfo(),
-		"locales":  locales,
-		"wrong":    p.wrong,
-		"warning":  p.warning,
-		"theme":    currentTheme,
-		"nav_logo": navLogo,
-		"color":    colorTheme,
+		"loggedIn":   rc.userID > 0,
+		"pages":      AllPagesInfo(),
+		"locales":    locales,
+		"wrong":      p.wrong,
+		"loginStyle": p.warning,
+		"themeOpts":  rc.themeOpts,
 	}
 	p.wrong = "display: none;"
 	p.warning = "display: none;"
-	if rq.userID > 0 {
-		http.Redirect(rq.rw, rq.r, "../cabinet", http.StatusFound)
+	if rc.userID > 0 {
+		http.Redirect(rc.rw, rc.r, "../cabinet", http.StatusFound)
 	}
-	err = p.tmpl.Lookup("register").Execute(rq.rw, params)
+	err = p.tmpl.Lookup("register").Execute(rc.rw, params)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
 
-func (p *registerPage) Post(rq RequestContext) {
-	email := rq.r.FormValue("email")
-	username := rq.r.FormValue("text")
-	password := rq.r.FormValue("password")
-	// FIXME: use simpler check for strings - (email == "")
-	if len(email) < 1 || len(username) < 1 || len(password) < 1 {
+func (p *registerPage) Post(rc RequestContext) {
+	email := rc.r.FormValue("email")
+	username := rc.r.FormValue("text")
+	password := rc.r.FormValue("password")
+	if email == "" || username == "" || password == "" {
 		p.warning = "display: block;"
-		http.Redirect(rq.rw, rq.r, "/register/", http.StatusFound)
+		rc.Redirect(registerPageName)
 		return
 	}
 	if len(password) < 8 {
 		p.wrong = "display: block;"
-		http.Redirect(rq.rw, rq.r, "/register/", http.StatusFound)
+		rc.Redirect(registerPageName)
 		return
 	}
 	err := p.db.NewUser(email, username, password)
 	userId, err := p.db.GetUserId(username, password)
-	if err != nil || userId <= 0 {
-		// FIXME: put register redirect to method
-		http.Redirect(rq.rw, rq.r, "/register/", http.StatusFound)
+	if err != nil || rc.IsLoggedIn() {
+		rc.Redirect(registerPageName)
 	}
 	session := http.Cookie{
 		Name:    sessionCookie,
@@ -84,9 +69,7 @@ func (p *registerPage) Post(rq RequestContext) {
 		Domain:  "*",
 		Expires: time.Now().Add(time.Hour * 48),
 	}
-	// FIXME: you don't need to add this cookie to request (it's input object, changes won't apply anywhere)
-	rq.r.AddCookie(&session)
-	http.SetCookie(rq.rw, &session)
-	http.Redirect(rq.rw, rq.r, "../cabinet", http.StatusFound)
+	http.SetCookie(rc.rw, &session)
+	rc.Redirect(cabinetPageName)
 	return
 }

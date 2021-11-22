@@ -2,7 +2,6 @@ package pages
 
 import (
 	"fmt"
-	"net/http"
 	"strconv"
 	"strings"
 )
@@ -15,32 +14,20 @@ type releasePage struct {
 	page
 }
 
-func (p *releasePage) Get(rq RequestContext) {
-	releaseIdStr := strings.TrimPrefix(rq.r.RequestURI, "/release/")
+func (p *releasePage) Get(rc RequestContext) {
+	releaseIdStr := strings.TrimPrefix(rc.r.RequestURI, "/release/")
 	releaseId, err := strconv.Atoi(releaseIdStr)
 	if err != nil {
-		// FIXME: put not found redirect into method (don't forget to check that page is not nil)
-		http.Redirect(rq.rw, rq.r, "../notFound", http.StatusSeeOther)
+		rc.Redirect(notFoundPageName)
 	}
-	var currentTheme string
-	var navLogo string
-	var colorTheme string
-	if rq.theme == "SGreen" {
-		currentTheme = "style_black.css"
-		navLogo = "logo_white.png"
-		colorTheme = "success"
-	} else {
-		currentTheme = "style.css"
-		navLogo = "logo.png"
-		colorTheme = "primary"
-	}
-	locales, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"),
+	pgLocs := []string{
 		"release_p", "release_return", "status_success", "status_pending", "status_default",
 		"status_canceled", "nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request", "nav_logout",
 		"nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more", "footer_dist",
-	)
-	if rq.userID <= 0 {
-		http.Redirect(rq.rw, rq.r, "../login", http.StatusSeeOther)
+	}
+	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+	if !rc.IsLoggedIn() {
+		rc.Redirect(loginPageName)
 	}
 	tracks, err := p.db.GetTrackByReleaseId(releaseId)
 	if err != nil {
@@ -51,16 +38,14 @@ func (p *releasePage) Get(rq RequestContext) {
 		fmt.Println("can't get release by id")
 	}
 	var params = map[string]interface{}{
-		"loggedIn": rq.userID > 0,
-		"release":  release,
-		"tracks":   tracks,
-		"pages":    AllPagesInfo(),
-		"locales":  locales,
-		"theme":    currentTheme,
-		"nav_logo": navLogo,
-		"color":    colorTheme,
+		"loggedIn":  rc.userID > 0,
+		"release":   release,
+		"tracks":    tracks,
+		"pages":     AllPagesInfo(),
+		"locales":   locales,
+		"themeOpts": rc.themeOpts,
 	}
-	err = p.tmpl.Lookup("release").Execute(rq.rw, params)
+	err = p.tmpl.Lookup("release").Execute(rc.rw, params)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -2,7 +2,6 @@ package pages
 
 import (
 	"fmt"
-	"net/http"
 	"strings"
 )
 
@@ -14,74 +13,57 @@ type uploadPage struct {
 	page
 }
 
-func (p *uploadPage) Get(rq RequestContext) {
+func (p *uploadPage) Get(rc RequestContext) {
 	var params = map[string]interface{}{
-		"loggedIn": rq.userID > 0,
+		"loggedIn": rc.userID > 0,
 	}
 
-	if rq.userID <= 0 {
-		http.Redirect(rq.rw, rq.r, "../login", http.StatusSeeOther)
+	if !rc.IsLoggedIn() {
+		rc.Redirect(loginPageName)
 	}
-	err := p.tmpl.Lookup(uploadPageName).Execute(rq.rw, params)
+	err := p.tmpl.Lookup(uploadPageName).Execute(rc.rw, params)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
 
-func (p *uploadPage) Post(rq RequestContext) {
-	err := rq.r.ParseForm()
+func (p *uploadPage) Post(rc RequestContext) {
+	err := rc.r.ParseForm()
 	if err != nil {
-		http.Redirect(rq.rw, rq.r, "../cabinet", http.StatusSeeOther)
+		rc.Redirect(cabinetPageName)
 	}
-	var currentTheme string
-	var navLogo string
-	var colorTheme string
-	var cover string
-	if rq.theme == "SGreen" {
-		currentTheme = "style_black.css"
-		navLogo = "logo_white.png"
-		colorTheme = "success"
-		cover = "cover_black.png"
-	} else {
-		currentTheme = "style.css"
-		navLogo = "logo.png"
-		colorTheme = "primary"
-		cover = "cover.png"
+	if !rc.IsLoggedIn() {
+		rc.Redirect(loginPageName)
 	}
-	if rq.userID <= 0 {
-		http.Redirect(rq.rw, rq.r, "../login", http.StatusSeeOther)
-	}
-	locales, err := p.loc.TranslatePage(rq.r.Header.Get("Accept-Language"), "cabinet_p",
-		"cabinet_settings", "settings_change_pass", "settings_old_pass", "settings_new_pass",
+	pgLocs := []string{
+		"cabinet_p", "cabinet_settings", "settings_change_pass", "settings_old_pass", "settings_new_pass",
 		"settings_new_pass2", "settings_btn_change", "settings_email_conf", "settings_email",
 		"settings_btn_submit", "nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request",
 		"nav_logout", "nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more",
 		"footer_dist",
-	)
+	}
+	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
 	if err != nil {
-		GetPage(notFoundPageName).Get(rq)
+		GetPage(notFoundPageName).Get(rc)
 		return
 	}
 	var perfs string
-	perfs = strings.Join(rq.r.Form["perf"], ", ")
-	releaseName := rq.r.FormValue("releaseName")
-	cover := rq.r.FormValue("cover")
-	err = p.db.NewRelease(rq.userId, cover, releaseName, perfs, "В исполнении")
+	perfs = strings.Join(rc.r.Form["perf"], ", ")
+	releaseName := rc.r.FormValue("releaseName")
+	//cover := rc.r.FormValue("cover")
+	err = p.db.NewRelease(rc.userID, rc.themeOpts.Cover, releaseName, perfs, "В исполнении")
 	if err != nil {
 		fmt.Println(err)
 	}
 	var params = map[string]interface{}{
-		"loggedIn":    rq.userID > 0,
+		"loggedIn":    rc.userID > 0,
 		"pages":       AllPagesInfo(),
 		"releaseName": releaseName,
 		"perfs":       perfs,
-		"theme":       currentTheme,
-		"nav_logo":    navLogo,
-		"color":       colorTheme,
-		"cover":       cover,
 		"locales":     locales,
+		"themeOpts":   rc.themeOpts,
 	}
-	err = p.tmpl.Lookup(uploadPageName).Execute(rq.rw, params)
+	err = p.tmpl.Lookup(uploadPageName).Execute(rc.rw, params)
 	if err != nil {
 		fmt.Println(err)
 	}

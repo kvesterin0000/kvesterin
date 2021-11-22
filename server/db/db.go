@@ -22,7 +22,6 @@ const (
 
 type Service interface {
 	NewUser(email, username, password string) error
-	// FIXME: maybe rename to Login()
 	GetUserId(username, password string) (int, error)
 	GetUser(id int) (*User, error)
 	GetReleaseByUserId(int) ([]*Release, error)
