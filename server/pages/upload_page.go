@@ -1,11 +1,17 @@
 package pages
 
 import (
+	"bufio"
 	"fmt"
+	"net/http"
+	"os"
+	"path"
 	"strings"
 )
 
 const uploadPageName = "upload"
+const coverUploadPath = "resources/release covers/"
+const formCover = "cover"
 
 var _ Page = &uploadPage{}
 
@@ -42,16 +48,27 @@ func (p *uploadPage) Post(rc RequestContext) {
 		"nav_logout", "nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more",
 		"footer_dist",
 	}
-	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+	locales, err := p.loc.TranslatePage(rc.Language(), pgLocs...)
 	if err != nil {
 		GetPage(notFoundPageName).Get(rc)
+		return
+	}
+	err = rc.r.ParseMultipartForm(1 << 20)
+	if err != nil {
+		fmt.Println(err)
 		return
 	}
 	var perfs string
 	perfs = strings.Join(rc.r.Form["perf"], ", ")
 	releaseName := rc.r.FormValue("releaseName")
-	//cover := rc.r.FormValue("cover")
-	err = p.db.NewRelease(rc.userID, rc.themeOpts.Cover, releaseName, perfs, "В исполнении")
+	fmt.Printf("%+v, %+v", rc.r.Form, rc.r.MultipartForm)
+	fileName, err := parseCover(rc.r)
+	if err != nil {
+		rc.rw.WriteHeader(http.StatusInternalServerError)
+		fmt.Println(err)
+		return
+	}
+	err = p.db.NewRelease(rc.userID, fileName, releaseName, perfs, "В исполнении")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -67,4 +84,30 @@ func (p *uploadPage) Post(rc RequestContext) {
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+func parseCover(r *http.Request) (string, error) {
+	cover, fileHeader, err := r.FormFile(formCover)
+	if err != nil {
+		return "", err
+	}
+	fileName := path.Join(coverUploadPath, fileHeader.Filename)
+	f, err := os.Create(fileName)
+	if err != nil {
+		return "", err
+	}
+	buf := bufio.NewReader(cover)
+	_, err = buf.WriteTo(f)
+	if err != nil {
+		return "", err
+	}
+	err = f.Close()
+	if err != nil {
+		return "", err
+	}
+	err = cover.Close()
+	if err != nil {
+		return "", err
+	}
+	return fileHeader.Filename, nil
 }

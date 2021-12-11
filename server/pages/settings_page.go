@@ -30,7 +30,8 @@ func (p *settingsPage) Get(rc RequestContext) {
 		"nav_request", "nav_logout", "nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev",
 		"footer_more", "footer_dist",
 	}
-	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+
+	locales, err := p.loc.TranslatePage(rc.Language(), pgLocs...)
 	if err != nil {
 		GetPage(notFoundPageName).Get(rc)
 		return
@@ -66,6 +67,11 @@ func (p *settingsPage) Post(rc RequestContext) {
 			rc.SetCookie(themeCookie, strconv.Itoa(1), time.Hour*24*30)
 		} else {
 			rc.SetCookie(themeCookie, strconv.Itoa(0), 0)
+		}
+		if rc.r.FormValue("lang") == "on" {
+			rc.SetCookie(langCookie, "en", time.Hour*24*30*12)
+		} else {
+			rc.SetCookie(langCookie, "ru", time.Hour*24*30*12)
 		}
 	}
 	rc.Redirect(settingsPageName)

@@ -14,10 +14,11 @@ type indexPage struct {
 
 func (p *indexPage) Get(rc RequestContext) {
 	pgLocs := []string{
-		"title", "desc", "start", "nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request",
-		"nav_logout", "nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more", "footer_dist",
+		"title", "desc", "start", "welcome_message1", "welcome_message2", "welcome_message3", "welcome_btn", "nav_main",
+		"nav_prices", "nav_profile", "nav_cabinet", "nav_request", "nav_logout", "nav_login", "footer_info",
+		"footer_vk", "footer_yt", "footer_dev", "footer_more", "footer_dist",
 	}
-	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+	locales, err := p.loc.TranslatePage(rc.Language(), pgLocs...)
 	if err != nil {
 		GetPage(notFoundPageName).Get(rc)
 		return

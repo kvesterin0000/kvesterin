@@ -12,6 +12,7 @@ import (
 const (
 	sessionCookie = "sessionId"
 	themeCookie   = "theme"
+	langCookie    = "lang"
 )
 
 var allPages map[string]Page

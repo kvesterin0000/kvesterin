@@ -5,6 +5,7 @@ import (
 	"github.com/wasteimage/dist/server/pages/locales"
 	"net/http"
 	"strconv"
+	"strings"
 	"text/template"
 	"time"
 )
@@ -22,17 +23,20 @@ type RequestContext struct {
 	userID    int
 	theme     Theme
 	themeOpts ThemeOpts
+	lang      string
 }
 
 func ContextFromRWR(rw http.ResponseWriter, r *http.Request) RequestContext {
 	userID := readSession(r)
 	theme := readTheme(r)
+	lang := readLanguage(r)
 
 	rc := RequestContext{
 		rw:     rw,
 		r:      r,
 		userID: userID,
 		theme:  theme,
+		lang:   lang,
 	}
 	// FIXME: put all path-including variables to common config structure
 	if rc.IsDark() {
@@ -42,6 +46,7 @@ func ContextFromRWR(rw http.ResponseWriter, r *http.Request) RequestContext {
 			"cover_black.png",
 			"strelka_white.png",
 			"checked",
+			"",
 			ColorSuccess,
 		}
 	} else {
@@ -51,8 +56,12 @@ func ContextFromRWR(rw http.ResponseWriter, r *http.Request) RequestContext {
 			"cover.png",
 			"strelka.png",
 			"",
+			"",
 			ColorPrimary,
 		}
+	}
+	if rc.Language() == "en" || strings.HasPrefix(r.Header.Get("Accept-Language"), "en") {
+		rc.themeOpts.LanguageCheckBox = "checked"
 	}
 	return rc
 }
@@ -63,6 +72,10 @@ func (rc *RequestContext) IsDark() bool {
 
 func (rc *RequestContext) IsLoggedIn() bool {
 	return rc.userID > 0
+}
+
+func (rc *RequestContext) Language() string {
+	return rc.lang
 }
 
 func (rc *RequestContext) Redirect(name string) {
@@ -141,4 +154,13 @@ func readSession(r *http.Request) int {
 		return 0
 	}
 	return sessionInt
+}
+
+func readLanguage(r *http.Request) string {
+	lang := r.Header.Get("Accept-Language")
+	langCookie, err := r.Cookie(langCookie)
+	if err == nil && langCookie.Value != "" {
+		lang = langCookie.Value
+	}
+	return lang
 }

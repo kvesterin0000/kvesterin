@@ -28,7 +28,7 @@ func (p *loginPage) Get(rc RequestContext) {
 		"footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more", "footer_dist",
 	}
 	rc.SetCookie(sessionCookie, "", 0)
-	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+	locales, err := p.loc.TranslatePage(rc.Language(), pgLocs...)
 	var params = map[string]interface{}{
 		"loggedIn":   rc.userID > 0,
 		"pages":      AllPagesInfo(),

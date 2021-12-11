@@ -19,7 +19,7 @@ func (p *pricesPage) Get(rc RequestContext) {
 		"nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request", "nav_logout", "nav_login",
 		"footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more", "footer_dist",
 	}
-	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+	locales, err := p.loc.TranslatePage(rc.Language(), pgLocs...)
 	var params = map[string]interface{}{
 		"loggedIn":  rc.userID > 0,
 		"pages":     AllPagesInfo(),

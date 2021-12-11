@@ -25,7 +25,7 @@ func (p *releasePage) Get(rc RequestContext) {
 		"status_canceled", "nav_main", "nav_prices", "nav_profile", "nav_cabinet", "nav_request", "nav_logout",
 		"nav_login", "footer_info", "footer_vk", "footer_yt", "footer_dev", "footer_more", "footer_dist",
 	}
-	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+	locales, err := p.loc.TranslatePage(rc.Language(), pgLocs...)
 	if !rc.IsLoggedIn() {
 		rc.Redirect(loginPageName)
 	}

@@ -15,12 +15,13 @@ const (
 )
 
 type ThemeOpts struct {
-	CSS           string
-	Logo          string
-	Cover         string
-	Pointer       string
-	CheckboxValue string
-	BtnColor      Color
+	CSS              string
+	Logo             string
+	Cover            string
+	Pointer          string
+	CheckboxValue    string
+	LanguageCheckBox string
+	BtnColor         Color
 }
 
 var _ Page = &cabinetPage{}
@@ -44,7 +45,7 @@ func (p *cabinetPage) Get(rc RequestContext) {
 	if err != nil {
 		fmt.Println("no releases")
 	}
-	locales, err := p.loc.TranslatePage(rc.r.Header.Get("Accept-Language"), pgLocs...)
+	locales, err := p.loc.TranslatePage(rc.Language(), pgLocs...)
 	var params = map[string]interface{}{
 		"loggedIn":  rc.IsLoggedIn(),
 		"releases":  releases,
