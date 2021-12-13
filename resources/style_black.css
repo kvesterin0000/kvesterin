@@ -207,6 +207,12 @@ body {
     border-radius: 20px;
 }
 
+.cab_upload_img {
+    height: 300px;
+    width: 300px;
+    margin-left: 80px;
+}
+
 #d_release_status_default:hover {
     transition-duration: 0.5s;
     background-color: rgba(31, 31, 31, 0.08);
@@ -395,6 +401,13 @@ body {
     text-align: center;
 }
 
+.t_release_authors {
+    padding-bottom: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 30px;
+    text-align: center;
+}
+
 .t_release_date {
     padding-bottom: 30px;
     color: rgba(255, 255, 255, 0.4);
@@ -456,13 +469,9 @@ body {
 
 .cover {
     height: 300px;
-    margin-left: 80px;
+    width: 300px;
+    margin-left: 300px;
     border-radius: 30px;
-}
-
-.cover:hover {
-    background-color: rgba(255,255,255,0.05);
-    cursor: pointer;
 }
 
 .upload_rel_name {
@@ -473,6 +482,7 @@ body {
 .upload_name_box {
     width: 500px;
     margin-left: 200px;
+    margin-top: 50px;
     border-bottom: 2px solid rgba(74, 199, 82, 0.2);
 }
 

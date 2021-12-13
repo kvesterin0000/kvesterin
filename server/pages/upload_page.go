@@ -72,6 +72,11 @@ func (p *uploadPage) Post(rc RequestContext) {
 	if err != nil {
 		fmt.Println(err)
 	}
+	releaseId, err := p.db.GetReleaseId(releaseName, perfs)
+	release, err := p.db.GetReleaseById(releaseId)
+	if err != nil {
+		fmt.Println("can't get release by id")
+	}
 	var params = map[string]interface{}{
 		"loggedIn":    rc.userID > 0,
 		"pages":       AllPagesInfo(),
@@ -79,6 +84,7 @@ func (p *uploadPage) Post(rc RequestContext) {
 		"perfs":       perfs,
 		"locales":     locales,
 		"themeOpts":   rc.themeOpts,
+		"release":     release,
 	}
 	err = p.tmpl.Lookup(uploadPageName).Execute(rc.rw, params)
 	if err != nil {

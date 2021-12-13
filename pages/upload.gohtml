@@ -1,28 +1,25 @@
 {{define "upload"}}
     {{template "header" .}}
     {{template "nav" .}}
+    {{$color := .themeOpts.BtnColor}}
     <body>
     <p class="zg" style="padding-top: 150px; text-align: center;">Добавление релиза</p>
     <div class="upload_box">
-        <form method="post">
-            <input name="form_name" type="hidden" value="cover_upload">
-            <label>
-                <img src="/resources/img/{{print .themeOpts.Cover}}" class="cover" id="blah">
-                <input type="file" accept="image/jpeg" hidden onchange="readURL(this);" name="cover">
-            </label><br><br>
-            <div class="upload_name_box">
-                <p class="upload_rel_name">{{.releaseName}}</p>
-            </div>
-            <br>
-            <div>
-                <p class="upload_rel_perfs">{{.perfs}}</p>
-            </div>
-            <br>
-            <div class="track_box">
-                <input type="submit" value="Добавить трек" class="btn btn-{{print .themeOpts.BtnColor}}" data-bs-toggle="modal"
-                       data-bs-target="#staticBackdrop1" id="btn_add_track">
-            </div>
-        </form>
+        <input name="form_name" type="hidden" value="cover_upload">
+        <img src="/resources/release%20covers/{{print .release.Cover}}" class="cover">
+        <div class="upload_name_box">
+            <p class="upload_rel_name">{{.release.Name}}</p>
+        </div>
+        <br>
+        <div>
+            <p class="upload_rel_perfs">{{.release.Authors}}</p>
+        </div>
+        <br>
+        <div class="track_box">
+            <input type="submit" value="Добавить трек" class="btn btn-{{print .themeOpts.BtnColor}}"
+                   data-bs-toggle="modal"
+                   data-bs-target="#staticBackdrop1" id="btn_add_track">
+        </div>
         <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -33,19 +30,30 @@
                     </div>
                     <form method="post">
                         <div class="modal-body">
-                            <input class="form-control" type="text" placeholder="Исполнитель"
-                                   aria-label="default input example" style="margin-bottom: 25px;">
                             <input class="form-control" type="text" placeholder="Название трека"
                                    aria-label="default input example" style="margin-bottom: 25px;">
                             <input class="form-control" type="text" placeholder="Дополнительно указать (опционально)"
                                    aria-label="default input example" style="margin-bottom: 25px;">
+                            <div class="PerformerList" id="PerformerList">
+                                <div class="Performer">
+                                    <div style="display: flex;">
+                                        <input class="form-control" id="Perf" name="perf" type="text"
+                                               placeholder="Исполнитель"
+                                               aria-label="default input example"
+                                               style="margin-bottom: 25px; margin-right: 25px;">
+                                        <button type="button" class="btn btn-{{print $color}}" id="addPerf"
+                                                style="height: 45px; width: 45px;">+
+                                        </button>
+                                    </div>
+                                    <input class="form-control" type="text" placeholder="ФИО Исполнителя"
+                                           aria-label="default input example" style="margin-bottom: 25px;">
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label" style="">Добавьте wav-файл</label>
                                 <input class="form-control" type="file" id="formFile" accept="audio/vnd.3gpp.iufp">
                                 <p class="second_text">Файл должен быть в формате .wav 44100ghz 16bit stereo.</p>
                             </div>
-                            <input class="form-control" type="text" placeholder="ФИО Исполнителя (исполнителей)"
-                                   aria-label="default input example" style="margin-bottom: 25px;">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Трек содержит нецензурную
@@ -54,7 +62,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <input type="submit" value="Готово" class="btn btn-{{print .themeOpts.BtnColor}}" data-bs-dismiss="modal"
+                            <input type="submit" value="Готово" class="btn btn-{{print .themeOpts.BtnColor}}"
+                                   data-bs-dismiss="modal"
                                    data-bs-toggle="modal">
                         </div>
                     </form>
@@ -63,6 +72,36 @@
         </div>
     </div>
     <script src="/resources/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript">
+
+        var PerfId = 0;
+        var PerformerPt1 = `<div class="PerformerElement">
+                                    <div style="display: flex;">
+                                        <input class="form-control" id="Perf`
+        var PerformerPt2 = `" name="perf" type="text"
+                                               placeholder="Исполнитель"
+                                               aria-label="default input example"
+                                               style="margin-bottom: 25px; margin-right: 25px;">
+                                        <button type="button" class="btn btn-secondary" id="removePerf"
+                                            style="height: 45px; width: 45px;">-</button>
+                                    </div>
+                                    <input class="form-control" type="text" placeholder="ФИО Исполнителя"
+                                           aria-label="default input example" style="margin-bottom: 25px;">
+                                </div>`;
+
+        function addPerformer() {
+            PerfId++;
+            let currentPerfId = PerfId;
+            let node = document.createElement("div");
+            node.innerHTML = PerformerPt1 + currentPerfId + PerformerPt2;
+            document.getElementById('PerformerList').appendChild(node);
+            node.querySelector("button").addEventListener("click", function (e) {
+                e.target.parentElement.parentElement.remove();
+            });
+        }
+
+        document.getElementById('addPerf').addEventListener("click", addPerformer);
+    </script>
     </body>
     {{template "footer" .}}
 {{end}}
