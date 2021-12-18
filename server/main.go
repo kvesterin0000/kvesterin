@@ -10,8 +10,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-//TODO: Запретить получение чужого релиза пользователем по переходу в строке
-
 func main() {
 
 	pgDB, err := db.New("user=postgres host=0.0.0.0 port=8889 dbname=fuse sslmode=disable")

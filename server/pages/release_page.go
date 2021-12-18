@@ -2,6 +2,7 @@ package pages
 
 import (
 	"fmt"
+	"github.com/wasteimage/dist/server/db"
 	"strconv"
 	"strings"
 )
@@ -37,6 +38,10 @@ func (p *releasePage) Get(rc RequestContext) {
 	if err != nil {
 		fmt.Println("can't get release by id")
 	}
+	releases, err := p.db.GetReleaseByUserId(rc.userID)
+	if !findReleaseInReleases(release, releases) {
+		rc.Redirect(cabinetPageName)
+	}
 	var params = map[string]interface{}{
 		"loggedIn":  rc.userID > 0,
 		"release":   release,
@@ -53,4 +58,13 @@ func (p *releasePage) Get(rc RequestContext) {
 
 func (p *releasePage) Post(rq RequestContext) {
 	GetPage(notFoundPageName).Get(rq)
+}
+
+func findReleaseInReleases(release *db.Release, releases []*db.Release) bool {
+	for i := 0; i < len(releases); i++ {
+		if releases[i].Name == release.Name {
+			return true
+		}
+	}
+	return false
 }
