@@ -61,21 +61,27 @@ func (p *uploadPage) Post(rc RequestContext) {
 	var perfs string
 	perfs = strings.Join(rc.r.Form["perf"], ", ")
 	releaseName := rc.r.FormValue("releaseName")
-	fmt.Printf("%+v, %+v", rc.r.Form, rc.r.MultipartForm)
 	fileName, err := parseCover(rc.r)
 	if err != nil {
 		rc.rw.WriteHeader(http.StatusInternalServerError)
 		fmt.Println(err)
 		return
 	}
-	err = p.db.NewRelease(rc.userID, fileName, releaseName, perfs, "В исполнении")
-	if err != nil {
-		fmt.Println(err)
+	releases, err := p.db.GetReleaseByUserId(rc.userID)
+	if !FindReleaseInReleases(releaseName, perfs, releases) {
+		err = p.db.NewRelease(rc.userID, fileName, releaseName, perfs, "В исполнении")
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 	releaseId, err := p.db.GetReleaseId(releaseName, perfs)
 	release, err := p.db.GetReleaseById(releaseId)
 	if err != nil {
 		fmt.Println("can't get release by id")
+	}
+	tracks, err := p.db.GetTrackByReleaseId(releaseId)
+	if err != nil {
+		fmt.Println("can't get tracks by release id")
 	}
 	var params = map[string]interface{}{
 		"loggedIn":    rc.userID > 0,
@@ -85,6 +91,7 @@ func (p *uploadPage) Post(rc RequestContext) {
 		"locales":     locales,
 		"themeOpts":   rc.themeOpts,
 		"release":     release,
+		"tracks":      tracks,
 	}
 	err = p.tmpl.Lookup(uploadPageName).Execute(rc.rw, params)
 	if err != nil {

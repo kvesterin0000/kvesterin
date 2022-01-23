@@ -502,6 +502,10 @@ body {
     margin-left: 220px;
 }
 
+#btn_go_next {
+    margin-left: 660px;
+}
+
 /*login and register boxes*/
 
 .login_box {

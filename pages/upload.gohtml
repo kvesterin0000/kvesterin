@@ -15,10 +15,19 @@
             <p class="upload_rel_perfs">{{.release.Authors}}</p>
         </div>
         <br>
+        {{range $i, $track := .tracks}}
+        <div>
+            <div>
+                <p class="release_name">{{print $track.Name}}</p>
+                <p class="release_authors">{{print $track.Authors}}</p>
+            </div>
+        </div>
+        {{end}}
         <div class="track_box">
             <input type="submit" value="Добавить трек" class="btn btn-{{print .themeOpts.BtnColor}}"
                    data-bs-toggle="modal"
-                   data-bs-target="#staticBackdrop1" id="btn_add_track">
+                   data-bs-target="#staticBackdrop1" id="btn_add_track" >
+            <button class="btn btn-{{print .themeOpts.BtnColor}}" id="btn_go_next">></button>
         </div>
         <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -132,7 +132,6 @@ func (s *service) NewRelease(userId int, cover, name, authors, status string) er
 	query := fmt.Sprintf(
 		"insert into releases (user_id, cover, name, authors, status) values ('%d', '%s', '%s', '%s', '%s')",
 		userId, cover, name, authors, status)
-	fmt.Println(query)
 	_, err := s.db.ExecContext(ctx, query)
 	if err != nil {
 		return fmt.Errorf("error release insert: %w", err)

@@ -39,7 +39,7 @@ func (p *releasePage) Get(rc RequestContext) {
 		fmt.Println("can't get release by id")
 	}
 	releases, err := p.db.GetReleaseByUserId(rc.userID)
-	if !findReleaseInReleases(release, releases) {
+	if !FindReleaseInReleases(release.Name, release.Authors, releases) {
 		rc.Redirect(cabinetPageName)
 	}
 	var params = map[string]interface{}{
@@ -60,9 +60,9 @@ func (p *releasePage) Post(rq RequestContext) {
 	GetPage(notFoundPageName).Get(rq)
 }
 
-func findReleaseInReleases(release *db.Release, releases []*db.Release) bool {
+func FindReleaseInReleases(name, authors string, releases []*db.Release) bool {
 	for i := 0; i < len(releases); i++ {
-		if releases[i].Name == release.Name {
+		if releases[i].Name == name && releases[i].Authors == authors {
 			return true
 		}
 	}
